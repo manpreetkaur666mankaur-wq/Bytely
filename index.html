@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bytely – Learn computer skills and coding</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#F6F5FF;--surface:#fff;--ink:#14123A;--mute:#55537d;--line:#dcd9f5;--brand:#3D4BFF;--on:#fff;--sun:#FFC933;--ok:#0B7A55;--bad:#C2255C;--code:#14123A;--ci:#e9e8ff;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D0C27;--surface:#16143D;--ink:#EEEDFF;--mute:#a3a1d0;--line:#2a2766;--brand:#8D96FF;--on:#0D0C27;--ok:#3DD9A0;--bad:#FF7AA8;--code:#0A091D}}
+:root[data-theme="dark"]{--bg:#0D0C27;--surface:#16143D;--ink:#EEEDFF;--mute:#a3a1d0;--line:#2a2766;--brand:#8D96FF;--on:#0D0C27;--ok:#3DD9A0;--bad:#FF7AA8;--code:#0A091D}
+html{height:100%}*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:17px/1.6 "Bricolage Grotesque",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 50px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;align-items:center;gap:12px;height:56px;padding-bottom:0}
+.logo{font-weight:800;font-size:22px;margin-right:auto;border:0;background:none;color:var(--ink);padding:0}
+.logo b{color:var(--brand)}
+.chip{font:600 13px "JetBrains Mono",monospace;padding:5px 10px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:var(--on);border:0;border-radius:10px;padding:12px 20px;font-weight:700;margin:4px 6px 4px 0}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+button:focus-visible,textarea:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+h1{font-size:clamp(34px,7vw,56px);line-height:1.05;letter-spacing:-.03em;margin:36px 0 14px;font-weight:800}
+h2{font-size:28px;margin:30px 0 6px;letter-spacing:-.02em}h3{font-size:21px;margin:26px 0 6px}
+.hero p,.sub{color:var(--mute);font-size:19px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:16px}
+.card strong{display:block;font-size:21px}.card span{display:block;color:var(--mute);font-size:15px}.card em{font-style:normal;color:var(--ok);font-weight:700;font-size:14px}
+.c0{--c:#2B5EE8}.c1{--c:#1E8E5A}.c2{--c:#D8481F}.c3{--c:#E8A400}.c4{--c:#5B6CFF}.c5{--c:#8A4FFF}.c6{--c:#E34F26}.c7{--c:#0E8FA8}.c8{--c:#D4A800}
+.list{display:grid;gap:10px}
+.item{text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;font-weight:600}
+.item b{display:inline-block;min-width:28px;color:var(--brand)}
+pre{margin:0 0 14px;padding:14px;border-radius:12px;background:var(--code);color:var(--ci);font:15px/1.6 "JetBrains Mono",monospace;white-space:pre-wrap;overflow-x:auto}
+.outp{border-left:4px solid var(--ok)}
+textarea{width:100%;height:170px;margin-bottom:10px;background:var(--code);color:var(--ci);border:1.5px solid var(--line);border-radius:12px;padding:14px;font:15px/1.6 "JetBrains Mono",monospace}
+.steps{padding-left:22px}.steps li{margin:12px 0}.steps input{width:20px;height:20px;vertical-align:-4px;margin-right:8px}
+.ok{color:var(--ok);font-weight:800;font-size:20px;margin:14px 0 6px}.bad{color:var(--bad);font-weight:700;margin:14px 0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+summary{font-weight:700;cursor:pointer}ul{margin:8px 0 0;padding-left:20px;color:var(--mute)}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.links a{color:var(--brand);font-weight:700;border:1.5px solid var(--brand);border-radius:10px;padding:8px 14px;text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+.wrap{max-width:1000px}
+.k-word{--c:#2B5EE8}.k-excel{--c:#1E8E5A}.k-ppt{--c:#D8481F}.k-py{--c:#B7791F}.k-c{--c:#5B6CFF}.k-cpp{--c:#8A4FFF}.k-html{--c:#E34F26}.k-css{--c:#1C7ED6}.k-sql{--c:#0E8FA8}.k-js{--c:#9C7A00}
+.badge{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 8px;border-radius:10px;background:var(--c);color:#fff;font:700 14px "JetBrains Mono",monospace}
+.badge.big{min-width:68px;height:68px;font-size:24px;border-radius:18px}
+.hero2{background:linear-gradient(135deg,#1b1760 0%,#3D4BFF 62%,#7B3FF2 100%);color:#fff;border-radius:24px;padding:36px;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;margin-top:22px}
+.hero2 h1{color:#fff;margin:12px 0}.hero2 p{color:#dcdcff;font-size:19px;margin:0 0 16px}
+.pill{display:inline-block;background:rgba(255,255,255,.16);border-radius:99px;padding:4px 14px;font-size:14px!important;font-weight:700;margin:0}
+.btn.sun{background:#FFC933;color:#14123A}.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5)}
+.stats{display:flex;gap:26px;margin-top:18px}.stats b{display:block;font-size:30px;line-height:1}.stats span{font-size:14px;color:#c9c9ff}
+.win{background:#0A091D;border-radius:16px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.win .dots{display:flex;gap:7px;padding:12px 14px;background:rgba(255,255,255,.07)}.win .dots i{width:11px;height:11px;border-radius:50%;background:#FFC933}.win .dots i:first-child{background:#ff6b8b}.win .dots i:last-child{background:#5be0a8}
+.win pre{margin:0;border-radius:0;font-size:15px;color:#e9e8ff}.win .res{padding:12px 16px;border-top:1px solid rgba(255,255,255,.1);color:#5be0a8;font-weight:700}
+.sec{display:flex;align-items:baseline;gap:12px;margin:40px 0 4px}.sec h2{margin:0}.sec span{color:var(--mute)}
+.card{display:flex;flex-direction:column;gap:6px;border-top-width:1.5px;border-left:6px solid var(--c);transition:transform .15s,box-shadow .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(61,75,255,.15)}
+.card span.badge{display:inline-grid;color:#fff;font-size:14px;line-height:1;margin-bottom:4px;align-self:flex-start}.card .go{color:var(--c);font-weight:800;margin-top:auto;padding-top:6px}
+progress{width:100%;height:9px;border-radius:9px;accent-color:var(--c,var(--brand))}
+.how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:14px}
+.how div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}.how b{font-size:19px;display:block}.how span{color:var(--mute)}
+.banner{display:flex;gap:18px;align-items:center;background:var(--surface);border:1.5px solid var(--line);border-left:8px solid var(--c);border-radius:18px;padding:20px;margin:16px 0}
+.banner h2{margin:0}.banner p{margin:2px 0 10px;color:var(--mute)}.banner>div{flex:1}.banner small{color:var(--mute)}
+.crumb{display:flex;align-items:center;gap:10px;font-weight:700;margin:14px 0 8px}
+.item{display:flex;align-items:center;gap:10px}.item:hover{border-color:var(--brand)}
+footer.f{text-align:center;color:var(--mute);margin-top:50px;font-size:15px}
+@media(max-width:760px){.hero2{grid-template-columns:1fr;padding:24px}.banner{flex-direction:column;align-items:flex-start}}
+
+/* ===== Student accounts (added) : dark forest-green screens ===== */
+[hidden]{display:none!important}
+.grecaptcha-badge{visibility:hidden}
+.hbtn,.avbtn{width:36px;height:36px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);display:grid;place-items:center;font-weight:800;padding:0;font-size:16px;line-height:1}
+.avbtn{background:linear-gradient(135deg,#1fa56b,#0d5a3b);color:#eafff3;border-color:transparent;font-size:13px;letter-spacing:.3px}
+.fg,.fgd,.fg-modal{--g0:#04120c;--g1:#082419;--gl:rgba(125,214,170,.22);--gt:#e9f7ef;--gm:#9cbfae;--ga:#3ddc97;--ga2:#1fb978;--gon:#03210f;--gw:#ffcf5c;--ge:#ff8fa0}
+.fg{position:fixed;inset:0;z-index:100;overflow-y:auto;color:var(--gt);background:radial-gradient(1000px 620px at 8% -10%,#0f5035 0%,transparent 60%),radial-gradient(900px 600px at 105% 0,#0b3d30 0%,transparent 62%),linear-gradient(160deg,var(--g1),var(--g0));padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);-webkit-overflow-scrolling:touch}
+.fg-bg{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.fg-orb{position:absolute;border-radius:50%;filter:blur(8px);opacity:.55;animation:fgf 14s ease-in-out infinite}
+.fg-orb.o1{width:340px;height:340px;left:-90px;top:-80px;background:radial-gradient(circle,#1c7a55,transparent 70%)}
+.fg-orb.o2{width:420px;height:420px;right:-140px;top:30%;background:radial-gradient(circle,#127a62,transparent 70%);animation-delay:-5s}
+.fg-orb.o3{width:300px;height:300px;left:25%;bottom:-120px;background:radial-gradient(circle,#2a9a5c,transparent 70%);animation-delay:-9s}
+.fg-sym{position:absolute;font:600 15px "JetBrains Mono",monospace;color:#8fe9bd;opacity:.22;border:1px solid rgba(143,233,189,.35);border-radius:10px;padding:6px 10px;animation:fgs 9s ease-in-out infinite;font-style:normal}
+.fg-sym.s1{left:6%;top:16%}.fg-sym.s2{right:8%;top:12%;animation-delay:-2s}.fg-sym.s3{left:10%;bottom:14%;animation-delay:-4s}.fg-sym.s4{right:12%;bottom:18%;animation-delay:-6s}.fg-sym.s5{left:46%;top:6%;animation-delay:-3s}.fg-sym.s6{right:30%;bottom:6%;animation-delay:-7s}
+@keyframes fgf{50%{transform:translate(24px,-18px) scale(1.06)}}
+@keyframes fgs{50%{transform:translateY(-14px) rotate(4deg)}}
+@keyframes fgin{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fgspin{to{transform:rotate(360deg)}}
+@keyframes fgshake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.fg-wrap{position:relative;min-height:100%;display:grid;grid-template-rows:1fr auto;place-items:center;padding:28px 16px 12px}
+.fg-card{width:min(100%,470px);background:linear-gradient(180deg,rgba(16,52,37,.86),rgba(8,32,22,.9));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--gl);border-radius:26px;padding:30px 26px;box-shadow:0 30px 80px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);animation:fgin .5s cubic-bezier(.2,.8,.2,1) both}
+.fg-card.wide{width:min(100%,1000px);display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:center;padding:42px}
+.fg-card.reg{width:min(100%,640px)}
+.fg-card.int{width:min(100%,760px)}
+.fg-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px;color:var(--gt);margin-bottom:18px}
+.fg-logo b{color:var(--ga)}
+.fg-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,var(--ga),#139a63);color:var(--gon);font-weight:800}
+.fg h1,.fg h2{margin:0 0 8px;line-height:1.1;letter-spacing:-.025em;color:var(--gt)}
+.fg h1{font-size:clamp(32px,6vw,52px)}.fg h2{font-size:28px}
+.fg h1 em{font-style:normal;background:linear-gradient(90deg,#7df0b9,#3ddc97 60%,#c9ff8f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fg p{color:var(--gm);margin:0 0 16px;font-size:16.5px}
+.fg-chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px}
+.fg-chip{font:600 12.5px "JetBrains Mono",monospace;color:#bff5d9;border:1px solid var(--gl);background:rgba(61,220,151,.08);padding:6px 11px;border-radius:99px}
+.fg-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:14px 20px;font-weight:800;font-size:17px;color:var(--gon);background:linear-gradient(135deg,#6af0b2,var(--ga) 55%,#20b974);box-shadow:0 10px 28px rgba(61,220,151,.28);transition:transform .15s,box-shadow .15s,filter .15s;margin:6px 0 0}
+.fg-btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(61,220,151,.38)}.fg-btn:active{transform:translateY(1px)}
+.fg-btn[disabled]{opacity:.55;cursor:not-allowed;transform:none;box-shadow:none}
+.fg-btn.ghost{background:transparent;color:var(--gt);border:1.5px solid var(--gl);box-shadow:none}
+.fg-btn.ghost:hover{border-color:var(--ga)}
+.fg-btn.auto{width:auto}
+.fg-btn.busy::after{content:"";width:16px;height:16px;border-radius:50%;border:2.5px solid rgba(3,33,15,.35);border-top-color:var(--gon);animation:fgspin .7s linear infinite}
+.fg-link{background:none;border:0;color:var(--ga);font-weight:700;padding:2px 0;text-decoration:underline;text-underline-offset:3px;font-size:inherit}
+.fg-link[disabled]{color:var(--gm);text-decoration:none;cursor:default}
+.fg label.l{display:block;font-weight:700;font-size:14px;color:#cdeedd;margin:14px 0 6px}
+.fg label.l small{font-weight:500;color:var(--gm)}
+.fg input[type=text],.fg input[type=tel],.fg select,.fg textarea,.fg input.ro{width:100%;background:rgba(255,255,255,.05);color:var(--gt);border:1.5px solid var(--gl);border-radius:13px;padding:13px 14px;font:inherit;font-size:16.5px;transition:border-color .15s,box-shadow .15s,background .15s}
+.fg select option{color:#0b2a1c}
+.fg textarea{min-height:92px;resize:vertical}
+.fg input::placeholder,.fg textarea::placeholder{color:#6f9a85}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--ga);box-shadow:0 0 0 4px rgba(61,220,151,.18);background:rgba(255,255,255,.07)}
+.fg input.ro{color:#bff5d9;background:rgba(61,220,151,.07);border-style:dashed}
+.fg .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg .phone{display:grid;grid-template-columns:128px 1fr;gap:10px}
+.fg .count{float:right;font:500 12px "JetBrains Mono",monospace;color:var(--gm)}
+.fg-seg{display:flex;flex-wrap:wrap;gap:8px}
+.fg-seg label{position:relative;cursor:pointer}
+.fg-seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.fg-seg span{display:block;padding:10px 16px;border:1.5px solid var(--gl);border-radius:12px;font-weight:700;color:var(--gm);transition:all .15s;background:rgba(255,255,255,.03)}
+.fg-seg input:checked+span{color:var(--gon);background:linear-gradient(135deg,#6af0b2,var(--ga));border-color:transparent;box-shadow:0 6px 16px rgba(61,220,151,.25)}
+.fg-seg input:focus-visible+span{outline:3px solid var(--gw);outline-offset:2px}
+.fg-err{display:none;margin:14px 0 0;padding:11px 14px;border-radius:12px;background:rgba(255,143,160,.1);border:1px solid rgba(255,143,160,.4);color:var(--ge);font-weight:600;font-size:15px}
+.fg-err.on{display:block;animation:fgshake .4s}
+.fg-note{display:none;margin:14px 0 0;padding:11px 14px;border-radius:12px;background:rgba(61,220,151,.1);border:1px solid var(--gl);color:#bff5d9;font-size:15px}
+.fg-note.on{display:block}
+.fg-warn{margin:16px 0 0;padding:14px 16px;border-radius:14px;background:rgba(255,207,92,.09);border:1px solid rgba(255,207,92,.4);color:#ffe9a8;font-size:15px}
+.fg-warn b{color:var(--gw)}
+.fg-otp{display:flex;gap:9px;justify-content:center;margin:20px 0 8px}
+.fg-otp input{width:100%;max-width:54px;aspect-ratio:1/1.12;text-align:center;font:700 24px "JetBrains Mono",monospace!important;padding:0!important;border-radius:14px!important}
+.fg-timer{text-align:center;color:var(--gm);font-size:15px;margin:12px 0 0}
+.fg-check{display:flex;gap:10px;align-items:flex-start;margin:18px 0 4px;color:var(--gm);font-size:15px;line-height:1.45}
+.fg-check input{width:20px;height:20px;margin-top:2px;accent-color:#3ddc97;flex:none}
+.fg-verified{display:inline-flex;align-items:center;gap:6px;color:var(--ga);font-weight:800;font-size:13px;margin-left:8px}
+.fg-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.fg-back{background:none;border:0;color:var(--gm);font-weight:700;padding:4px 0;font-size:15px}
+.fg-back:hover{color:var(--ga)}
+.fg-steps{display:flex;gap:6px;margin:0 0 16px}
+.fg-steps i{height:5px;flex:1;border-radius:9px;background:rgba(255,255,255,.12)}
+.fg-steps i.on{background:linear-gradient(90deg,#6af0b2,var(--ga))}
+.fg-foot{position:relative;color:#6f9a85;font-size:13px;text-align:center;margin:14px 0 8px}
+.fg-foot .fg-link{font-size:13px;color:#8fe9bd}
+.fg-win{background:#030c08;border:1px solid var(--gl);border-radius:18px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.fg-win .d{display:flex;gap:7px;padding:12px 14px;background:rgba(255,255,255,.06)}.fg-win .d i{width:11px;height:11px;border-radius:50%;background:#ffcf5c}.fg-win .d i:first-child{background:#ff7a93}.fg-win .d i:last-child{background:#5be0a8}
+.fg-win pre{margin:0;padding:16px 18px;border:0;border-radius:0;background:none;color:#cdeedd;font:14.5px/1.7 "JetBrains Mono",monospace;white-space:pre-wrap}
+.fg-win pre b{color:#7df0b9}.fg-win pre u{text-decoration:none;color:#ffcf5c}.fg-win pre s{text-decoration:none;color:#6f9a85}
+.fg-win .r{padding:12px 18px;border-top:1px solid rgba(255,255,255,.08);color:#5be0a8;font-weight:700}
+.fg-win .r::after{content:"▍";color:var(--ga);animation:fgblink 1s steps(1) infinite}
+@keyframes fgblink{50%{opacity:0}}
+.fg-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:14px 0 4px}
+.fg-tile{position:relative;text-align:left;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;background:rgba(255,255,255,.04);color:var(--gt);border:1.5px solid var(--gl);border-radius:16px;padding:13px;transition:all .18s}
+.fg-tile:hover{transform:translateY(-2px);border-color:rgba(61,220,151,.6)}
+.fg-tile strong{font-size:17px;line-height:1.1}.fg-tile small{grid-column:2;color:var(--gm);font-size:13px;line-height:1.3}
+.fg-tile .badge{grid-row:span 2}
+.fg-tile .tk{position:absolute;top:9px;right:10px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--gon);background:var(--ga);transform:scale(0);transition:transform .18s}
+.fg-tile[aria-pressed=true]{background:rgba(61,220,151,.12);border-color:var(--ga);box-shadow:0 0 0 3px rgba(61,220,151,.15)}
+.fg-tile[aria-pressed=true] .tk{transform:scale(1)}
+.fg button:focus-visible,.fgd button:focus-visible,.fg-modal button:focus-visible{outline:3px solid var(--gw);outline-offset:2px}
+.fg-load{display:grid;place-items:center;gap:14px;padding:30px 0;text-align:center}
+.fg-spin{width:42px;height:42px;border-radius:50%;border:4px solid rgba(255,255,255,.14);border-top-color:var(--ga);animation:fgspin .8s linear infinite}
+/* dashboard + profile (inside the existing page) */
+.fgd{position:relative;overflow:hidden;margin-top:18px;border-radius:26px;padding:24px;color:var(--gt);background:radial-gradient(700px 420px at 0 -20%,#12633f 0%,transparent 60%),linear-gradient(160deg,#08261b,#041510);border:1px solid var(--gl);box-shadow:0 24px 60px rgba(2,20,12,.35);animation:fgin .45s both}
+.fgd h1,.fgd h2,.fgd h3{color:var(--gt);margin:0}
+.fgd p{color:var(--gm);margin:0}
+.fgd-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:22px;align-items:center}
+.fgd-pill{display:inline-block;font:700 12px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:#bff5d9;background:rgba(61,220,151,.12);border:1px solid var(--gl);border-radius:99px;padding:5px 12px;margin-bottom:12px!important}
+.fgd-hi{font-size:clamp(30px,6vw,46px);line-height:1.08;letter-spacing:-.025em;margin:0 0 8px!important;word-break:break-word}
+.fgd-hi span{background:linear-gradient(90deg,#7df0b9,#3ddc97 60%,#c9ff8f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fgd-sub2{font-size:18px;margin-bottom:16px!important}
+.fgd .fg-btn{width:auto;display:inline-flex;margin:4px 8px 4px 0;padding:12px 20px;font-size:16px}
+.fgd-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fgd-stat{background:rgba(255,255,255,.05);border:1px solid var(--gl);border-radius:16px;padding:14px 10px;text-align:center}
+.fgd-stat b{display:block;font-size:30px;line-height:1.05;color:#7df0b9}.fgd-stat span{font-size:13px;color:var(--gm)}
+.fgd h3{font-size:19px;margin:26px 0 10px}
+.fgd-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}
+.fgd-card{background:rgba(255,255,255,.04);border:1px solid var(--gl);border-radius:18px;padding:16px 18px}
+.fgd-card h3{margin:0 0 8px;font-size:16px;color:#bff5d9}
+.fgd-card dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.fgd-card dt{color:var(--gm)}.fgd-card dd{margin:0;color:var(--gt);font-weight:600;word-break:break-word}
+.fgd-tags{display:flex;flex-wrap:wrap;gap:8px}
+.fgd-tag{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--gl);background:rgba(61,220,151,.09);border-radius:99px;padding:5px 12px 5px 6px;font-weight:700;font-size:14px;color:#d8f7e6}
+.fgd-tag .badge{min-width:24px;height:24px;border-radius:99px;font-size:10px;padding:0 6px}
+.fgd-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px}
+.fgd-subj{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;text-align:left;width:100%;background:rgba(255,255,255,.045);color:var(--gt);border:1px solid var(--gl);border-left:5px solid var(--c);border-radius:16px;padding:13px 14px;transition:transform .15s,border-color .15s,background .15s}
+.fgd-subj:hover{transform:translateY(-3px);background:rgba(255,255,255,.075);border-color:var(--c)}
+.fgd-subj strong{display:block;font-size:17px}.fgd-subj small{color:var(--gm);font-size:13px}
+.fgd-subj progress{display:block;width:100%;height:7px;margin:6px 0 3px;accent-color:#3ddc97}
+.fgd-subj .go{color:var(--ga);font-weight:800;font-size:20px}
+.fgd-next{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;margin-top:20px;background:linear-gradient(135deg,rgba(61,220,151,.16),rgba(61,220,151,.05));border:1px solid var(--gl);border-radius:18px;padding:16px 18px}
+.fgd-next b{display:block;font-size:19px}.fgd-next small{color:var(--gm);font-size:14px}
+.fgd-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.fgd .fg-btn.ghost{color:var(--gt)}
+.fgd-id{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fgd-av{width:68px;height:68px;border-radius:22px;display:grid;place-items:center;font-weight:800;font-size:24px;color:var(--gon);background:linear-gradient(135deg,#6af0b2,var(--ga) 60%,#20b974);box-shadow:0 10px 26px rgba(61,220,151,.3)}
+.fgd .fg-verified{margin:0}
+.fgd form{margin-top:14px}
+.fgd label.l{display:block;font-weight:700;font-size:14px;color:#cdeedd;margin:14px 0 6px}
+.fgd label.l small{font-weight:500;color:var(--gm)}
+.fgd input[type=text],.fgd select,.fgd textarea,.fgd input.ro{width:100%;background:rgba(255,255,255,.05);color:var(--gt);border:1.5px solid var(--gl);border-radius:13px;padding:13px 14px;font:inherit;font-size:16.5px}
+.fgd select option{color:#0b2a1c}.fgd textarea{min-height:92px;resize:vertical}
+.fgd input:focus,.fgd select:focus,.fgd textarea:focus{outline:none;border-color:var(--ga);box-shadow:0 0 0 4px rgba(61,220,151,.18)}
+.fgd input.ro{color:#bff5d9;background:rgba(61,220,151,.07);border-style:dashed}
+.fgd .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}.fgd .count{float:right;font:500 12px "JetBrains Mono",monospace;color:var(--gm)}
+.fgd .fg-seg label{position:relative;cursor:pointer}.fgd .fg-seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+.fgd .fg-seg span{display:block;padding:10px 16px;border:1.5px solid var(--gl);border-radius:12px;font-weight:700;color:var(--gm);background:rgba(255,255,255,.03)}
+.fgd .fg-seg input:checked+span{color:var(--gon);background:linear-gradient(135deg,#6af0b2,var(--ga));border-color:transparent}
+.fgd .fg-err{display:none;margin:14px 0 0;padding:11px 14px;border-radius:12px;background:rgba(255,143,160,.1);border:1px solid rgba(255,143,160,.4);color:var(--ge);font-weight:600}.fgd .fg-err.on{display:block}
+.fgd .fg-tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.fgd .fg-tile{position:relative;text-align:left;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:center;background:rgba(255,255,255,.04);color:var(--gt);border:1.5px solid var(--gl);border-radius:16px;padding:13px}
+.fgd .fg-tile strong{font-size:17px}.fgd .fg-tile small{grid-column:2;color:var(--gm);font-size:13px}.fgd .fg-tile .badge{grid-row:span 2}
+.fgd .fg-tile .tk{position:absolute;top:9px;right:10px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:800;color:var(--gon);background:var(--ga);transform:scale(0);transition:transform .18s}
+.fgd .fg-tile[aria-pressed=true]{background:rgba(61,220,151,.12);border-color:var(--ga)}.fgd .fg-tile[aria-pressed=true] .tk{transform:scale(1)}
+.fg-modal{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:18px;background:rgba(2,12,8,.78);backdrop-filter:blur(6px);animation:fgin .25s both}
+.fg-modal>div{width:min(100%,640px);max-height:88vh;overflow:auto;background:linear-gradient(180deg,#0f3324,#08201a);border:1px solid var(--gl);border-radius:22px;padding:24px;color:var(--gt);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.fg-modal h2{margin:0 0 10px;font-size:24px}.fg-modal h4{margin:16px 0 4px;color:#7df0b9;font-size:16px}.fg-modal p,.fg-modal li{color:var(--gm);font-size:15.5px;margin:0 0 6px}.fg-modal ul{padding-left:20px;margin:0}
+@media(max-width:860px){.fg-card.wide{grid-template-columns:1fr;padding:28px 22px;gap:22px}.fg-win{display:none}.fgd-hero{grid-template-columns:1fr}}
+@media(max-width:560px){.fg-card{padding:26px 18px;border-radius:22px}.fg .row,.fgd .row{grid-template-columns:1fr}.fg .phone{grid-template-columns:112px 1fr}.fg-otp{gap:6px}.fgd{padding:18px 14px;border-radius:22px}.fgd-next{grid-template-columns:1fr}.fg-sym{display:none}.fgd .fg-btn{width:100%;margin-right:0}}
+@media(prefers-reduced-motion:reduce){.fg *,.fgd,.fg-modal{animation:none!important;transition:none!important}}
+
+.chip{white-space:nowrap}
+@media(max-width:430px){header .wrap{gap:8px}.chip{font-size:11.5px;padding:4px 8px}.hbtn,.avbtn{width:34px;height:34px}header .btn.alt{padding:8px 12px;margin:0}}
+</style></head><body>
+<header><div class="wrap"><button class="logo" data-a="home">Byte<b>ly</b></button><span class="chip" id="xp">0 XP</span><button class="hbtn" id="hdash" data-a="dash" aria-label="My dashboard" title="My dashboard" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg></button><button class="avbtn" id="havatar" data-a="profile" aria-label="My profile" title="My profile" hidden></button><button class="btn alt" data-a="theme" aria-label="Switch dark or light mode">◐</button></div></header>
+<main class="wrap" id="app"></main>
+<div id="authroot" class="fg" hidden></div>
+<div id="recaptcha-container"></div>
+<!-- Firebase keys: firebase-config.js (or paste them on the welcome screen). See README.md -->
+<script src="firebase-config.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script>
+const S={
+word:{n:"MS Word",m:[
+["Interface & files","Ribbon, Quick Access Toolbar, status bar|Document views (Print Layout, Read Mode) and Zoom|Create, open, Save vs. Save As, close (.docx, .pdf)"],
+["Typing & editing","Typing, selecting, moving the cursor|Cut, Copy, Paste, Format Painter|Undo and Redo (Ctrl+Z, Ctrl+Y)|Spell check, grammar check, Find & Replace (Ctrl+H)"],
+["Text & paragraph formatting","Font face, size, color, bold, italic, underline, highlight|Change case|Alignment: left, center, right, justify|Line and paragraph spacing, indents, tabs|Bulleted, numbered and multi-level lists"],
+["Page setup & layout","Margins, orientation, paper size (A4, Letter)|Page breaks, blank pages, section breaks|Headers, footers, page numbers|Page borders, shading, watermarks"],
+["Tables & objects","Insert and style tables, merge cells, add or delete rows and columns|Pictures, shapes, icons, SmartArt|Text wrapping around images"],
+["Print & share","Print preview and print settings (Ctrl+P)|Export to PDF and share|Shortcuts: Ctrl+N, O, S, P, B, F"]],
+l:[["Microsoft Word help","https://support.microsoft.com/en-us/word"],["GCFGlobal Word tutorial","https://edu.gcfglobal.org/en/word/"],["W3Schools Word","https://www.w3schools.com/word/"]]},
+excel:{n:"Excel",m:[
+["Spreadsheet anatomy","Workbook vs. worksheet|Ribbon, Formula Bar, Name Box, gridlines|Rows, columns, cells (A1, B5)|Selecting ranges (A1:D10)"],
+["Data entry & editing","Enter text, numbers and dates|Edit and clear cells|Fill Handle for series and patterns|Insert and delete rows and columns|Freeze panes"],
+["Basic formatting","Number formats: currency, percentage, date, decimals|Fonts, borders, fill colors|Wrap Text and alignment|Column width and row height"],
+["Formulas & operators","Formulas start with =|Operators + - * /|Relative (A1) vs. absolute ($A$1) references"],
+["Essential functions","SUM, AVERAGE|COUNT, COUNTA|MIN, MAX"],
+["Data, charts & printing","Sort A-Z, Z-A, numeric|Filter data|Column, bar and pie charts|Page setup, print scaling, printing"]],
+l:[["Microsoft Excel help","https://support.microsoft.com/en-us/excel"],["GCFGlobal Excel tutorial","https://edu.gcfglobal.org/en/excel/"],["W3Schools Excel","https://www.w3schools.com/excel/"]]},
+ppt:{n:"PowerPoint",m:[
+["Interface & files","Ribbon, Slide pane, Thumbnail pane, Notes pane|New presentation from scratch or a template|Save and manage .pptx files"],
+["Working with slides","Add, delete, duplicate, reorder slides|Slide layouts (Title Slide, Title and Content, Blank)|Slide Sorter view"],
+["Adding & formatting content","Text placeholders and bullet points|Font styles, colors, alignment|The 5x5 and 7x7 rules for short slide text"],
+["Visuals & media","Insert and resize pictures, icons, shapes|Simple tables and charts"],
+["Transitions & animations","Transitions such as Fade and Push|Entrance and exit animations"],
+["Delivering a presentation","Start a show: F5 from start, Shift+F5 from current slide|Navigate slides live|Presenter tools and notes"]],
+l:[["Microsoft PowerPoint help","https://support.microsoft.com/en-us/powerpoint"],["GCFGlobal PowerPoint tutorial","https://edu.gcfglobal.org/en/powerpoint/"],["W3Schools PowerPoint","https://www.w3schools.com/powerpoint/"]]},
+py:{n:"Python",m:[
+["Getting started","Install Python and run a first program|print() and comments|Variables and types: int, float, str, bool"],
+["Operators & input","Arithmetic and comparison operators|input() and type conversion|Strings: slicing and f-strings"],
+["Control flow","if, elif, else|for and while loops|break and continue"],
+["Collections","Lists and tuples|Dictionaries and sets|Looping over collections"],
+["Functions & files","def, parameters, return|Importing modules|Reading and writing text files"]],
+l:[["python.org tutorial","https://docs.python.org/3/tutorial/"],["W3Schools Python","https://www.w3schools.com/python/"],["Learn Python","https://www.learnpython.org"]]},
+c:{n:"C",m:[
+["Getting started","Structure of a C program and main()|Compile and run|printf and comments"],
+["Variables & operators","int, float, char|scanf for input|Arithmetic, comparison, logical operators"],
+["Control flow","if / else and switch|for, while, do-while"],
+["Functions & arrays","Writing and calling functions|Arrays and strings"],
+["Pointers & structs","Pointer basics|Simple structs"]],
+l:[["W3Schools C","https://www.w3schools.com/c/"],["Learn-C.org","https://www.learn-c.org"],["GeeksforGeeks C","https://www.geeksforgeeks.org/c-programming-language/"]]},
+cpp:{n:"C++",m:[
+["Getting started","Program structure and compiling|cout and cin|Variables and data types"],
+["Operators & control flow","Operators|if / else and switch|Loops"],
+["Functions & arrays","Functions and parameters|Arrays"],
+["Strings & vectors","std::string|std::vector basics"],
+["Classes & objects","Classes, objects, constructors|Public and private members"]],
+l:[["W3Schools C++","https://www.w3schools.com/cpp/"],["LearnCpp.com","https://www.learncpp.com"],["cppreference","https://en.cppreference.com"]]},
+html:{n:"HTML",m:[
+["Page structure","doctype, html, head, body|Title and meta tags"],
+["Text content","Headings and paragraphs|Bold, italic, line breaks|Ordered and unordered lists"],
+["Links & images","The a tag and URLs|The img tag, alt text, sizing"],
+["Tables & forms","table, tr, td, th|Inputs, labels, buttons, select"],
+["Layout & CSS intro","Semantic tags: header, nav, main, footer|Basic CSS: colors, fonts, spacing"]],
+l:[["MDN Learn Web Development","https://developer.mozilla.org/en-US/docs/Learn_web_development"],["W3Schools HTML","https://www.w3schools.com/html/"],["freeCodeCamp","https://www.freecodecamp.org"]]},
+sql:{n:"SQL",m:[
+["Database basics","Tables, rows, columns|Primary and foreign keys"],
+["Reading data","SELECT and FROM|WHERE, AND, OR|ORDER BY and LIMIT"],
+["Changing data","INSERT, UPDATE, DELETE|CREATE TABLE and data types"],
+["Summaries","COUNT, SUM, AVG, MIN, MAX|GROUP BY and HAVING"],
+["Joins","INNER JOIN and LEFT JOIN|Combining two tables"]],
+l:[["W3Schools SQL","https://www.w3schools.com/sql/"],["SQLBolt","https://sqlbolt.com"],["SQLZoo","https://sqlzoo.net"]]},
+css:{n:"CSS",m:[
+["Basics","What CSS does|Selectors: tag, class (.name), id (#name)|Colors and backgrounds"],
+["Text","Font size, family and weight|Text alignment|Line spacing"],
+["Box model","Border, padding and margin|Width and height|Rounded corners and shadows"],
+["Layout","Flexbox: rows, columns, centering|Grid: columns and gaps"],
+["Responsive design","Media queries for phones|Hover effects"]],
+l:[["W3Schools CSS","https://www.w3schools.com/css/"],["MDN Styling basics","https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Styling_basics"],["CSS-Tricks","https://css-tricks.com"]]},
+js:{n:"JavaScript",m:[
+["Basics","let and const|Types: number, string, boolean|console.log"],
+["Operators & conditions","Operators|if / else|Comparing with ==="],
+["Loops & arrays","for and for...of|Array methods: push, map, filter"],
+["Functions","Declaring and calling functions|Parameters and return values"],
+["DOM basics","Select elements|Click events|Change text and styles"]],
+l:[["javascript.info","https://javascript.info"],["MDN JavaScript","https://developer.mozilla.org/en-US/docs/Web/JavaScript"],["W3Schools JavaScript","https://www.w3schools.com/js/"]]}};
+
+const LES={
+word:[{t:"Make and save your first document",s:["Open Word and click Blank document.","Type your name, then press the Enter key.","Press Ctrl and S together, type the name My first document, and click Save."]},
+{t:"Make text bold, bigger and centered",s:["Select your name by dragging the mouse over it.","Press Ctrl and B together to make it bold.","On the Home tab, click the Font Size box and choose 18.","Click the Center button (the lines in the middle) to center it."]},
+{t:"Make a bullet list and print preview",s:["Type three fruit names, one on each line.","Select all three lines with the mouse.","On the Home tab, click the Bullets button.","Press Ctrl and P together to see the print preview."]}],
+excel:[{t:"Type data into cells",s:["Click cell A1 and type Item, then press Tab. Type Price and press Enter.","Click A2 and type Pen, press Tab, type 10, press Enter.","Click A3 and type Book, press Tab, type 50, press Enter."]},
+{t:"Your first formula",s:["Click cell B4.","Type =SUM(B2:B3) and press Enter.","You should see 60 in the cell. Excel added 10 and 50 for you."]},
+{t:"Make a chart",s:["Select cells A1 to B3 by dragging the mouse.","Click the Insert tab.","Click Recommended Charts, choose a Column chart, then click OK."]}],
+ppt:[{t:"Make your title slide",s:["Open PowerPoint and click Blank Presentation.","Click the title box and type My first slide.","Click the subtitle box and type your name."]},
+{t:"Add a slide with bullet points",s:["On the Home tab, click New Slide.","Click the title box and type My hobbies.","Click the big box and type three hobbies, pressing Enter after each."]},
+{t:"Play your slideshow",s:["Press F5 to start the show.","Press the right arrow key to go to the next slide.","Press Esc to stop the show."]}],
+py:[{t:"Say hello",w:"print() shows text on the screen. The text goes inside quotes.",c:'print("Hello, world!")',o:"Hello, world!"},
+{t:"Store a name in a variable",w:"A variable is a box with a name that holds a value. The = sign puts the value in the box.",c:'name = "Ana"\nprint("Hi", name)',o:"Hi Ana"},
+{t:"Add two numbers",w:"Python can do math. Numbers do not need quotes.",c:"a = 5\nb = 3\nprint(a + b)",o:"8"}],
+c:[{t:"Your first C program",w:"Every C program starts in main(). printf shows text. \\n starts a new line.",c:'#include <stdio.h>\n\nint main() {\n  printf("Hello, world!\\n");\n  return 0;\n}',o:"Hello, world!"},
+{t:"Store a number",w:"int means a whole number. %d is where the number is printed.",c:'int age = 20;\nprintf("Age: %d", age);',o:"Age: 20"},
+{t:"Repeat with a loop",w:"A for loop repeats code. This one counts from 1 to 3.",c:'for (int i = 1; i <= 3; i++) {\n  printf("%d ", i);\n}',o:"1 2 3"}],
+cpp:[{t:"Your first C++ program",w:"cout shows text on the screen. Every program starts in main().",c:'#include <iostream>\nusing namespace std;\n\nint main() {\n  cout << "Hello, world!";\n  return 0;\n}',o:"Hello, world!"},
+{t:"Add two numbers",w:"int holds a whole number. cout can show the result of math.",c:"int x = 5;\nint y = 3;\ncout << x + y;",o:"8"},
+{t:"Repeat with a loop",w:"This loop counts from 1 to 3 and shows each number.",c:'for (int i = 1; i <= 3; i++) {\n  cout << i << " ";\n}',o:"1 2 3"}],
+html:[{t:"Make a big heading",w:"HTML uses tags. h1 means the biggest heading. A tag opens with <h1> and closes with </h1>.",c:"<h1>Hello, world!</h1>",o:"A big heading that says: Hello, world!"},
+{t:"Write a paragraph with bold text",w:"p is a paragraph. b makes text bold.",c:"<p>I am learning <b>HTML</b>.</p>",o:"A line of text where the word HTML is bold."},
+{t:"Make a link",w:"The a tag makes a link. href says where the link goes.",c:'<a href="https://www.w3schools.com">Visit W3Schools</a>',o:"A clickable link that says: Visit W3Schools"}],
+sql:[{t:"Read a whole table",w:"SELECT picks data. * means all columns. FROM says which table. End with a semicolon.",c:"SELECT * FROM students;",o:"Every row and column from the students table."},
+{t:"Filter rows",w:"WHERE keeps only the rows that match your rule.",c:"SELECT name FROM students WHERE age > 18;",o:"The names of students older than 18."},
+{t:"Add a new row",w:"INSERT INTO adds a new row to a table.",c:"INSERT INTO students (name, age) VALUES ('Ana', 20);",o:"One new row, Ana aged 20, is added to students."}],
+js:[{t:"Say hello",w:"console.log() shows text. Put the text inside quotes.",c:'console.log("Hello, world!");',o:"Hello, world!"},
+{t:"Add two numbers",w:"let makes a variable, a named box for a value.",c:"let a = 5;\nlet b = 3;\nconsole.log(a + b);",o:"8"},
+{t:"Repeat with a loop",w:"A for loop repeats code. This one counts from 1 to 3.",c:"for (let i = 1; i <= 3; i++) {\n  console.log(i);\n}",o:"1\n2\n3"}]};
+
+const CODE={
+html:[
+["Big heading","h1 is the biggest heading.",`<h1>Hello, world!</h1>`,`A big heading: Hello, world!`],
+["Paragraph","p makes a paragraph of text.",`<p>I am learning HTML.</p>`,`A line of text: I am learning HTML.`],
+["Bold and italic","b is bold, i is italic.",`<p><b>Bold</b> and <i>italic</i> text.</p>`,`Bold, and italic text.`],
+["Line break","br moves text to a new line.",`<p>Line one<br>Line two</p>`,`Two lines of text.`],
+["Two headings","h2 is a smaller heading under h1.",`<h1>Title</h1>
+<h2>Subtitle</h2>`,`A big title with a smaller subtitle under it.`],
+["Link","a makes a link. href is where it goes.",`<a href="https://www.w3schools.com">Visit W3Schools</a>`,`A clickable link.`],
+["Image","img shows a picture. alt describes it.",`<img src="cat.jpg" alt="A cat" width="200">`,`A picture of a cat, 200 pixels wide.`],
+["Bullet list","ul is a list, li is each item.",`<ul>
+  <li>Apple</li>
+  <li>Banana</li>
+</ul>`,`Two bullet points: Apple, Banana.`],
+["Numbered list","ol numbers the items for you.",`<ol>
+  <li>Wake up</li>
+  <li>Learn HTML</li>
+</ol>`,`A list numbered 1 and 2.`],
+["Box with div","div is an invisible box that groups things.",`<div>
+  <p>Inside a box</p>
+</div>`,`A paragraph inside a group box.`],
+["Table","A table has rows (tr), headings (th) and cells (td).",`<table>
+  <tr>
+    <th>Name</th>
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Ana</td>
+    <td>20</td>
+  </tr>
+</table>`,`A table with Name and Age, and a row for Ana, 20.`],
+["Text box","input lets people type.",`<input type="text" placeholder="Your name">`,`A box to type in with grey hint text.`],
+["Button","button makes something to click.",`<button>Click me</button>`,`A button that says Click me.`],
+["Label and email","label names an input.",`<label>Email: <input type="email"></label>`,`The word Email: and a box for an email address.`],
+["Dropdown","select makes a dropdown menu.",`<select>
+  <option>Red</option>
+  <option>Blue</option>
+</select>`,`A dropdown with Red and Blue.`],
+["Red text","style changes how things look.",`<p style="color: red;">Red text</p>`,`A paragraph in red.`],
+["Page sections","header and main describe parts of a page.",`<header>
+  <h1>My Site</h1>
+</header>
+<main>
+  <p>Welcome!</p>
+</main>`,`A site title at the top and a welcome line below.`],
+["Full page","Every real page has this skeleton.",`<!DOCTYPE html>
+<html>
+<head>
+  <title>My Page</title>
+</head>
+<body>
+  <h1>Hello</h1>
+</body>
+</html>`,`A page titled My Page showing the heading Hello.`],
+["Style block","A style block changes many things at once.",`<style>
+  h1 { color: blue; }
+
+body{background:radial-gradient(900px 520px at 8% -8%,rgba(123,63,242,.20),transparent 70%),radial-gradient(800px 520px at 100% 0,rgba(61,75,255,.18),transparent 70%),radial-gradient(700px 500px at 50% 110%,rgba(255,201,51,.14),transparent 70%),var(--bg);background-attachment:fixed}
+header{backdrop-filter:blur(10px);background:color-mix(in srgb,var(--bg) 80%,transparent)}
+.logo::before{content:"B";display:inline-grid;place-items:center;width:32px;height:32px;margin-right:9px;border-radius:10px;background:linear-gradient(135deg,#3D4BFF,#7B3FF2);color:#fff;font-size:18px;vertical-align:middle}
+.badge{background:linear-gradient(135deg,var(--c),color-mix(in srgb,var(--c) 50%,#7B3FF2));box-shadow:0 4px 10px color-mix(in srgb,var(--c) 40%,transparent)}
+.btn{box-shadow:0 4px 0 rgba(0,0,0,.2);transition:transform .1s,box-shadow .1s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(3px);box-shadow:none}.btn.alt{box-shadow:none}
+.hero2{position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(61,75,255,.28)}
+.hero2::before{content:"";position:absolute;width:380px;height:380px;right:-90px;top:-130px;border-radius:50%;background:radial-gradient(circle,rgba(255,201,51,.35),transparent 70%)}
+.hero2>*{position:relative}
+.hero2 h1{font-size:clamp(34px,5.5vw,54px)}
+.fl{position:absolute!important;animation:fl 5s ease-in-out infinite;z-index:2}
+.f1{top:16px;left:49%}.f2{bottom:16px;left:43%;animation-delay:-1.5s}.f3{top:12px;right:14px;animation-delay:-3s}.f4{bottom:12px;right:20px;animation-delay:-2s}
+@keyframes fl{50%{transform:translateY(-12px) rotate(6deg)}}
+#typ{min-height:58px}#typ::after{content:"▍";color:#FFC933;animation:bl 1s steps(1) infinite}@keyframes bl{50%{opacity:0}}
+.sec h2::after{content:"";display:block;width:46px;height:5px;border-radius:9px;background:var(--sun);margin-top:5px}
+.card{background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--surface)),var(--surface))}
+.card:hover{box-shadow:0 16px 32px color-mix(in srgb,var(--c) 30%,transparent);border-color:var(--c)}
+.card .go{transition:padding-left .2s}.card:hover .go{padding-left:8px}
+.how div{border-top:5px solid var(--sun);box-shadow:0 8px 20px rgba(20,18,58,.06)}.how div:nth-child(2){border-top-color:var(--brand)}.how div:nth-child(3){border-top-color:#0E9F6E}
+.banner{background:linear-gradient(120deg,color-mix(in srgb,var(--c) 12%,var(--surface)),var(--surface))}
+.item{transition:transform .12s,border-color .12s}.item:hover{transform:translateX(5px)}
+main pre{border-left:5px solid var(--c,var(--brand))}
+.ok{background:rgba(14,159,110,.13);padding:12px 16px;border-radius:12px}
+textarea{box-shadow:inset 0 2px 8px rgba(0,0,0,.25)}
+.cf{position:fixed;width:9px;height:14px;border-radius:2px;z-index:50;pointer-events:none;animation:pop 1.3s ease-out forwards}
+@keyframes pop{0%{transform:translate(0,0)}40%{transform:translate(var(--x),var(--y))}100%{transform:translate(var(--x),calc(var(--y) + 420px)) rotate(var(--r));opacity:0}}
+@media(max-width:760px){.fl{display:none!important}}
+@media(prefers-reduced-motion:reduce){.fl,.cf,#typ::after{animation:none!important}.cf{display:none}}
+</style>
+<h1>Blue title</h1>`,`A blue heading.`],
+["Simple form","A form groups inputs and a submit button.",`<form>
+  <input type="text" name="user">
+  <button type="submit">Send</button>
+</form>`,`A text box with a Send button.`]],
+js:[
+["Say hello","console.log shows text.",`console.log("Hello, world!");`,`Hello, world!`],
+["Variable","let stores a value in a named box.",`let name = "Ana";
+console.log(name);`,`Ana`],
+["Math","JavaScript can add numbers.",`console.log(5 + 3);`,`8`],
+["Join text","+ joins pieces of text.",`console.log("Hi " + "Sam");`,`Hi Sam`],
+["Variable math","Use a variable in math.",`let age = 20;
+console.log(age * 2);`,`40`],
+["If","if runs code only when a rule is true.",`let n = 7;
+if (n > 5) {
+  console.log("Big");
+}`,`Big`],
+["If and else","else runs when the rule is false. % gives the remainder.",`let n = 4;
+if (n % 2 === 0) {
+  console.log("Even");
+} else {
+  console.log("Odd");
+}`,`Even`],
+["For loop","A loop repeats code.",`for (let i = 1; i <= 3; i++) {
+  console.log(i);
+}`,`1
+2
+3`],
+["Array","An array is a list. The first item is number 0.",`let fruits = ["apple", "banana"];
+console.log(fruits[1]);`,`banana`],
+["Array length","length counts the items.",`let list = [4, 8, 15];
+console.log(list.length);`,`3`],
+["Function","A function is reusable code. return sends back a result.",`function add(a, b) {
+  return a + b;
+}
+console.log(add(2, 3));`,`5`],
+["While loop","while repeats as long as a rule is true.",`let i = 1;
+while (i <= 3) {
+  console.log(i);
+  i++;
+}`,`1
+2
+3`],
+["Add up a list","Loop over a list and add each item.",`let total = 0;
+for (let x of [1, 2, 3]) {
+  total += x;
+}
+console.log(total);`,`6`],
+["Object","An object holds named values.",`let user = { name: "Ana", age: 20 };
+console.log(user.name);`,`Ana`],
+["Map","map changes every item in a list.",`let nums = [1, 2, 3];
+console.log(nums.map(n => n * 2));`,`[ 2, 4, 6 ]`],
+["Filter","filter keeps only items that match.",`console.log([1, 2, 3, 4].filter(n => n % 2 === 0));`,`[ 2, 4 ]`],
+["Find the biggest","Compare each item to the biggest so far.",`let nums = [3, 9, 4];
+let max = nums[0];
+for (let n of nums) {
+  if (n > max) max = n;
+}
+console.log(max);`,`9`],
+["Reverse text","Split into letters, reverse, join back.",`console.log("hello".split("").reverse().join(""));`,`olleh`],
+["Factorial","A function can call itself. 5 x 4 x 3 x 2 x 1.",`function fact(n) {
+  if (n <= 1) return 1;
+  return n * fact(n - 1);
+}
+console.log(fact(5));`,`120`],
+["Even or odd list","? : is a short if and else.",`for (let i = 1; i <= 5; i++) {
+  console.log(i % 2 === 0 ? "even" : "odd");
+}`,`odd
+even
+odd
+even
+odd`]],
+py:[
+["Say hello","print shows text.",`print("Hello, world!")`,`Hello, world!`],
+["Variable","A variable stores a value.",`name = "Ana"
+print(name)`,`Ana`],
+["Math","Python can add numbers.",`print(5 + 3)`,`8`],
+["Join text","+ joins pieces of text.",`print("Hi " + "Sam")`,`Hi Sam`],
+["Variable math","Use a variable in math.",`age = 20
+print(age * 2)`,`40`],
+["If","if runs code only when a rule is true. The next line is indented with 4 spaces.",`n = 7
+if n > 5:
+    print("Big")`,`Big`],
+["If and else","else runs when the rule is false. % gives the remainder.",`n = 4
+if n % 2 == 0:
+    print("Even")
+else:
+    print("Odd")`,`Even`],
+["For loop","range(1, 4) gives 1, 2, 3.",`for i in range(1, 4):
+    print(i)`,`1
+2
+3`],
+["List","A list holds many items. The first is number 0.",`fruits = ["apple", "banana"]
+print(fruits[1])`,`banana`],
+["List length","len counts the items.",`print(len([4, 8, 15]))`,`3`],
+["Function","def makes reusable code.",`def add(a, b):
+    return a + b
+
+print(add(2, 3))`,`5`],
+["While loop","while repeats as long as a rule is true.",`i = 1
+while i <= 3:
+    print(i)
+    i += 1`,`1
+2
+3`],
+["Add up a list","Loop over a list and add each item.",`total = 0
+for x in [1, 2, 3]:
+    total += x
+print(total)`,`6`],
+["Dictionary","A dictionary holds named values.",`user = {"name": "Ana", "age": 20}
+print(user["name"])`,`Ana`],
+["List comprehension","A short way to change every item.",`nums = [1, 2, 3]
+print([n * 2 for n in nums])`,`[2, 4, 6]`],
+["Filter a list","Add if to keep only matching items.",`print([n for n in [1, 2, 3, 4] if n % 2 == 0])`,`[2, 4]`],
+["Biggest number","max finds the biggest.",`print(max([3, 9, 4]))`,`9`],
+["Reverse text","[::-1] reads backwards.",`print("hello"[::-1])`,`olleh`],
+["Factorial","A function can call itself. 5 x 4 x 3 x 2 x 1.",`def fact(n):
+    if n <= 1:
+        return 1
+    return n * fact(n - 1)
+
+print(fact(5))`,`120`],
+["f-string","f before the quotes lets you put variables in { }.",`name = "Ana"
+age = 20
+print(f"{name} is {age} years old")`,`Ana is 20 years old`]],
+c:[
+["Hello program","Every C program starts in main(). \\n is a new line.",`#include <stdio.h>
+
+int main() {
+  printf("Hello, world!\\n");
+  return 0;
+}`,`Hello, world!`],
+["Two lines","\\n starts a new line.",`printf("Line 1\\nLine 2");`,`Line 1
+Line 2`],
+["Math","int is a whole number. %d prints it.",`int a = 5;
+int b = 3;
+printf("%d", a + b);`,`8`],
+["Show a number","%d is where the number goes.",`int age = 20;
+printf("Age: %d", age);`,`Age: 20`],
+["Decimal number","float holds decimals. %.2f shows 2 decimals.",`float pi = 3.14;
+printf("%.2f", pi);`,`3.14`],
+["If","if runs code only when a rule is true.",`int n = 7;
+if (n > 5) {
+  printf("Big");
+}`,`Big`],
+["If and else","else runs when the rule is false.",`int n = 4;
+if (n % 2 == 0) {
+  printf("Even");
+} else {
+  printf("Odd");
+}`,`Even`],
+["For loop","A for loop repeats code.",`for (int i = 1; i <= 3; i++) {
+  printf("%d ", i);
+}`,`1 2 3`],
+["Array","An array is a list of the same type.",`int nums[3] = {4, 8, 15};
+printf("%d", nums[1]);`,`8`],
+["Letter","char holds one letter. %c prints it.",`char letter = 'A';
+printf("%c", letter);`,`A`],
+["Function","A function is reusable code.",`#include <stdio.h>
+
+int add(int a, int b) {
+  return a + b;
+}
+
+int main() {
+  printf("%d", add(2, 3));
+  return 0;
+}`,`5`],
+["While loop","while repeats as long as a rule is true.",`int i = 1;
+while (i <= 3) {
+  printf("%d ", i);
+  i++;
+}`,`1 2 3`],
+["Add up an array","Loop and add each item.",`int nums[3] = {1, 2, 3};
+int total = 0;
+for (int i = 0; i < 3; i++) {
+  total += nums[i];
+}
+printf("%d", total);`,`6`],
+["Text","%s prints text.",`char name[] = "Ana";
+printf("Hi %s", name);`,`Hi Ana`],
+["Switch","switch picks one case.",`int day = 2;
+switch (day) {
+  case 1: printf("Mon"); break;
+  case 2: printf("Tue"); break;
+}`,`Tue`],
+["Pointer","A pointer stores where a value lives. * reads it.",`int x = 10;
+int *p = &x;
+printf("%d", *p);`,`10`],
+["Biggest number","Compare each item to the biggest so far.",`int nums[3] = {3, 9, 4};
+int max = nums[0];
+for (int i = 1; i < 3; i++) {
+  if (nums[i] > max) max = nums[i];
+}
+printf("%d", max);`,`9`],
+["Struct","A struct groups related values.",`struct Person {
+  char name[10];
+  int age;
+};
+struct Person p = {"Ana", 20};
+printf("%s %d", p.name, p.age);`,`Ana 20`],
+["Factorial","A function can call itself.",`#include <stdio.h>
+
+int fact(int n) {
+  if (n <= 1) return 1;
+  return n * fact(n - 1);
+}
+
+int main() {
+  printf("%d", fact(5));
+  return 0;
+}`,`120`],
+["Odd and even","Loop and test each number.",`for (int i = 1; i <= 5; i++) {
+  if (i % 2 == 0) printf("even ");
+  else printf("odd ");
+}`,`odd even odd even odd`]],
+cpp:[
+["Hello program","Every C++ program starts in main(). cout shows text.",`#include <iostream>
+using namespace std;
+
+int main() {
+  cout << "Hello, world!";
+  return 0;
+}`,`Hello, world!`],
+["Two lines","\\n starts a new line.",`cout << "Line 1\\n" << "Line 2";`,`Line 1
+Line 2`],
+["Math","int is a whole number.",`int a = 5;
+int b = 3;
+cout << a + b;`,`8`],
+["Text variable","string holds text.",`string name = "Ana";
+cout << name;`,`Ana`],
+["Decimal number","double holds decimals.",`double pi = 3.14;
+cout << pi * 2;`,`6.28`],
+["If","if runs code only when a rule is true.",`int n = 7;
+if (n > 5) {
+  cout << "Big";
+}`,`Big`],
+["If and else","else runs when the rule is false.",`int n = 4;
+if (n % 2 == 0) {
+  cout << "Even";
+} else {
+  cout << "Odd";
+}`,`Even`],
+["For loop","A for loop repeats code.",`for (int i = 1; i <= 3; i++) {
+  cout << i << " ";
+}`,`1 2 3`],
+["Array","An array is a list of the same type.",`int nums[3] = {4, 8, 15};
+cout << nums[1];`,`8`],
+["Join text","+ joins strings.",`string a = "Hi ";
+cout << a + "Sam";`,`Hi Sam`],
+["Function","A function is reusable code.",`#include <iostream>
+using namespace std;
+
+int add(int a, int b) {
+  return a + b;
+}
+
+int main() {
+  cout << add(2, 3);
+  return 0;
+}`,`5`],
+["While loop","while repeats as long as a rule is true.",`int i = 1;
+while (i <= 3) {
+  cout << i << " ";
+  i++;
+}`,`1 2 3`],
+["Vector size","A vector is a list that can grow.",`vector<int> v = {1, 2, 3};
+cout << v.size();`,`3`],
+["Add up a vector","Loop and add each item.",`vector<int> v = {1, 2, 3};
+int total = 0;
+for (int x : v) {
+  total += x;
+}
+cout << total;`,`6`],
+["Switch","switch picks one case.",`int day = 2;
+switch (day) {
+  case 1: cout << "Mon"; break;
+  case 2: cout << "Tue"; break;
+}`,`Tue`],
+["Pointer","A pointer stores where a value lives. * reads it.",`int x = 10;
+int *p = &x;
+cout << *p;`,`10`],
+["Biggest number","Compare each item to the biggest so far.",`int nums[3] = {3, 9, 4};
+int mx = nums[0];
+for (int n : nums) {
+  if (n > mx) mx = n;
+}
+cout << mx;`,`9`],
+["Class","A class is a blueprint for objects.",`class Dog {
+public:
+  string name = "Rex";
+};
+Dog d;
+cout << d.name;`,`Rex`],
+["Factorial","A function can call itself.",`#include <iostream>
+using namespace std;
+
+int fact(int n) {
+  if (n <= 1) return 1;
+  return n * fact(n - 1);
+}
+
+int main() {
+  cout << fact(5);
+  return 0;
+}`,`120`],
+["Odd and even","Loop and test each number.",`for (int i = 1; i <= 5; i++) {
+  if (i % 2 == 0) cout << "even ";
+  else cout << "odd ";
+}`,`odd even odd even odd`]],
+sql:[
+["Read a table","SELECT picks data. * means all columns. The table is students (name, age).",`SELECT * FROM students;`,`Every row of students.`],
+["One column","Name the column you want.",`SELECT name FROM students;`,`Only the name column.`],
+["Two columns","Separate columns with commas.",`SELECT name, age FROM students;`,`The name and age columns.`],
+["Limit rows","LIMIT shows only the first few rows.",`SELECT * FROM students LIMIT 3;`,`The first 3 rows.`],
+["No repeats","DISTINCT removes repeated values.",`SELECT DISTINCT age FROM students;`,`Each age once.`],
+["Filter rows","WHERE keeps only matching rows.",`SELECT name FROM students WHERE age > 18;`,`Names of students older than 18.`],
+["Exact match","= checks for an exact value.",`SELECT * FROM students WHERE age = 20;`,`Students aged 20.`],
+["Two rules","AND needs both rules to be true.",`SELECT * FROM students WHERE age > 18 AND age < 25;`,`Students between 19 and 24.`],
+["Sort","ORDER BY sorts the rows.",`SELECT name FROM students ORDER BY age;`,`Names, youngest first.`],
+["Sort backwards","DESC sorts from big to small.",`SELECT name FROM students ORDER BY age DESC;`,`Names, oldest first.`],
+["Add a row","INSERT INTO adds a row.",`INSERT INTO students (name, age) VALUES ('Ana', 20);`,`A new row: Ana, 20.`],
+["Change a row","UPDATE changes values. Always use WHERE.",`UPDATE students SET age = 21 WHERE name = 'Ana';`,`Ana's age becomes 21.`],
+["Delete a row","DELETE removes rows. Always use WHERE.",`DELETE FROM students WHERE name = 'Ana';`,`Ana's row is removed.`],
+["Count rows","COUNT counts rows.",`SELECT COUNT(*) FROM students;`,`The number of students.`],
+["Average","AVG finds the average.",`SELECT AVG(age) FROM students;`,`The average age.`],
+["Match a pattern","LIKE with % matches any letters.",`SELECT * FROM students WHERE name LIKE 'A%';`,`Students whose name starts with A.`],
+["Group","GROUP BY makes one result per group.",`SELECT age, COUNT(*) FROM students GROUP BY age;`,`How many students have each age.`],
+["Create a table","CREATE TABLE makes a new table.",`CREATE TABLE courses (
+  id INT,
+  title TEXT
+);`,`A new empty table named courses.`],
+["Join tables","JOIN connects two tables.",`SELECT students.name, courses.title
+FROM students
+JOIN courses ON students.course_id = courses.id;`,`Each student next to their course title.`],
+["Filter groups","HAVING filters groups after GROUP BY.",`SELECT age, COUNT(*) FROM students GROUP BY age HAVING COUNT(*) > 1;`,`Ages shared by more than one student.`]]};
+CODE.css=[
+["Text color","color changes text color.",`h1 { color: red; }`,`The h1 heading turns red.`],
+["Background color","background-color fills the page.",`body { background-color: lightblue; }`,`The page background is light blue.`],
+["Font size","px means pixels.",`p { font-size: 20px; }`,`Paragraph text becomes bigger.`],
+["Center text","text-align moves text.",`h1 { text-align: center; }`,`The heading is in the middle.`],
+["Font family","font-family picks the font.",`p { font-family: Arial; }`,`Paragraphs use the Arial font.`],
+["Bold text","font-weight makes text thicker.",`p { font-weight: bold; }`,`Paragraph text is bold.`],
+["Class","A class starts with a dot. Use class=\"big\" in HTML.",`.big { font-size: 40px; }`,`Anything with class big becomes large.`],
+["Id","An id starts with #. It styles one element.",`#title { color: green; }`,`The element with id title turns green.`],
+["Border","A border is a line around a box.",`div { border: 2px solid black; }`,`Every div gets a black line around it.`],
+["Padding","Padding is space inside the box.",`div { padding: 20px; }`,`Text has space from the edge of its box.`],
+["Margin","Margin is space outside the box.",`div { margin: 20px; }`,`Boxes are pushed away from each other.`],
+["Width and height","Set the size of a box.",`div { width: 200px; height: 100px; }`,`Each div is 200 by 100 pixels.`],
+["Rounded corners","border-radius rounds the corners.",`div { border-radius: 12px; }`,`Boxes get soft round corners.`],
+["Hover","hover runs when the mouse is over it.",`button:hover { background-color: orange; }`,`A button turns orange under the mouse.`],
+["Shadow","box-shadow adds a soft shadow.",`div { box-shadow: 2px 2px 8px gray; }`,`Boxes get a grey shadow.`],
+["Flexbox row","display: flex puts items in a row.",`.row { display: flex; }`,`Children of .row sit side by side.`],
+["Space items","justify-content spreads items out.",`.row {
+  display: flex;
+  justify-content: space-between;
+}`,`Items spread across the full width.`],
+["Center anything","Center both ways with flex.",`.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}`,`The content sits in the exact middle.`],
+["Grid","Grid makes columns. 1fr is one equal share.",`.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}`,`Three equal columns.`],
+["Phone rule","A media query only applies on small screens.",`@media (max-width: 600px) {
+  body { font-size: 14px; }
+}`,`Text gets smaller on phones.`]];
+const XO={word:[
+["Change the font and color",["Select a line of text with the mouse.","On the Home tab, click the Font box and choose Arial.","Click the arrow next to Font Color and choose blue.","Press Ctrl and U together to underline."]],
+["Copy, cut and paste",["Type one sentence.","Select it, then press Ctrl and C to copy.","Click on a new line and press Ctrl and V to paste.","Select the first sentence, press Ctrl and X to cut, click elsewhere and press Ctrl and V."]],
+["Undo mistakes and find words",["Type a few words.","Press Ctrl and Z to undo, then Ctrl and Y to redo.","Press Ctrl and H to open Find and Replace.","Type a word to find, a new word to use, then click Replace All."]],
+["Margins and page direction",["Click the Layout tab.","Click Margins and choose Narrow.","Click Orientation and choose Landscape.","Change Orientation back to Portrait."]],
+["Header and page number",["Click the Insert tab, then click Header and choose Blank.","Type your title in the header.","Click Page Number, choose Bottom of Page and pick a style.","Double-click the middle of the page to close the header."]],
+["Insert a table",["Click the Insert tab, then click Table.","Drag across 3 columns and 3 rows.","Type in the first cell, then press Tab to move to the next cell.","Click the Table Design tab and choose a style."]],
+["Add a picture and save as PDF",["Click Insert, then Pictures, then This Device and choose a picture.","Drag a corner of the picture to make it smaller.","Click File, then Save As, and choose PDF in the file type list.","Click Save."]]],
+excel:[
+["Show numbers as money",["Type 1500 in a cell and press Enter.","Click the cell again.","On the Home tab, open the Number Format box and choose Currency.","Click Increase Decimal once to see more digits."]],
+["Fill a series with the Fill Handle",["Type 1 in A1 and 2 in A2.","Select both cells.","Drag the small square at the bottom-right corner down to A10.","You should see the numbers 1 to 10."]],
+["Bold, borders and colors",["Type a small table with a heading row.","Select the heading row and press Ctrl and B.","Select the whole table, click Borders and choose All Borders.","Select the heading row and choose a Fill Color."]],
+["Average, count, min and max",["Type five numbers in A1 to A5.","In B1 type =AVERAGE(A1:A5) and press Enter.","In B2 type =COUNT(A1:A5), in B3 type =MIN(A1:A5), in B4 type =MAX(A1:A5).","Check that each answer makes sense."]],
+["Add, subtract, multiply, divide",["Type 10 in A1 and 2 in B1.","In C1 type =A1+B1 (answer 12).","In D1 type =A1*B1 (answer 20) and in E1 type =A1/B1 (answer 5).","Change A1 to 20 and watch the answers update."]],
+["Sort and filter",["Type a list of names in column A and ages in column B.","Click any cell inside the list.","Click the Data tab, then Sort A to Z.","Click Filter, open the arrow on the age column and choose only some ages."]],
+["Fixed cell references with $",["Type 0.1 in D1.","Type 100 in A2 and 200 in A3.","In B2 type =A2*$D$1 and press Enter (answer 10).","Drag the Fill Handle of B2 down to B3. B3 should show 20."]]],
+ppt:[
+["Change the slide design",["Click the Design tab.","Click a theme you like.","Click a color style on the right.","Look at every slide to see the change."]],
+["Add a picture",["Click the Insert tab, then Pictures, then This Device.","Choose a picture and click Insert.","Drag a corner to make it smaller.","Drag the picture to move it."]],
+["Add a shape with text",["Click Insert, then Shapes, and choose a rectangle.","Drag on the slide to draw it.","Type a word while the shape is selected.","Click Shape Fill and choose a color."]],
+["Reorder and copy slides",["Look at the slide list on the left.","Drag one slide up or down.","Right-click a slide and choose Duplicate Slide.","Right-click the copy and choose Delete Slide."]],
+["Add a table and a chart",["Click Insert, then Table, and drag across 3 columns and 2 rows.","Type words in the cells.","Add a new slide, click Insert, then Chart.","Choose Column and click OK."]],
+["Add a slide transition",["Click the Transitions tab.","Choose Fade.","Click Apply To All.","Press F5 and move through the slides."]],
+["Animate text and present",["Click a text box.","Click the Animations tab and choose Fade.","Press Shift and F5 together to play from this slide.","Press Esc to stop."]]]};
+for(const k in XO)LES[k].push(...XO[k].map(([t,s])=>({t,s})));
+for(const k in CODE)LES[k]=CODE[k].map(([t,w,c,o])=>({t,w,c,o}));
+const LV=["Level 1: Beginner","Level 2: Easy","Level 3: Medium","Level 4: Hard"];
+const item=(k,i,l)=>`<button class="item" data-a="lesson" data-k="${k}" data-i="${i}"><b>${dn(k,i)?"✓":i+1}</b> ${l.t}</button>`;
+function courseV(k){const s=S[k],L=LES[k],n=L.filter((_,i)=>dn(k,i)).length,g=Math.ceil(L.length/5);
+const lst=Array.from({length:g},(_,x)=>`<h3>${LV[x]}</h3><div class="list">`+L.slice(x*5,x*5+5).map((l,j)=>item(k,x*5+j,l)).join("")+`</div>`).join("");
+return `<button class="btn alt" data-a="home">← All subjects</button><div class="banner k-${k}"><span class="badge big">${BADGE[k]}</span><div><h2>${s.n}</h2><p>${TAG[k]}</p><progress value="${n}" max="${L.length}"></progress><small>${n} of ${L.length} lessons done</small></div></div><h3>Step 1: Read the syllabus</h3>`+s.m.map((m,i)=>`<details${i==0?" open":""}><summary>${m[0]}</summary><ul>${m[1].split("|").map(t=>`<li>${t}</li>`).join("")}</ul></details>`).join("")+`<h3>Step 2: Practice, from easy to hard</h3>`+lst+`<h3>Learn more on these websites</h3><div class="links">`+s.l.map(a=>`<a href="${a[1]}" target="_blank" rel="noopener noreferrer">${a[0]}</a>`).join("")+`</div>`}
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const ORDER=["html","py","js","sql","css","c","cpp","ppt","excel","word"];
+const BADGE={word:"W",excel:"X",ppt:"P",py:"Py",c:"C",cpp:"C++",html:"&lt;/&gt;",css:"{ }",sql:"DB",js:"JS"};
+const TAG={word:"Write letters, reports and CVs",excel:"Tables, formulas and charts",ppt:"Make and present slides",html:"Build your first web page",css:"Make web pages look great",js:"Make web pages come alive",py:"The easiest first language",sql:"Ask questions of databases",c:"The classic language of machines",cpp:"Fast programs and games"};
+const isOff=k=>k=="word"||k=="excel"||k=="ppt";
+const norm=(s,k)=>{const t=s.replace(/[“”‘’']/g,'"').replace(/\s+/g,"");return k=="sql"||k=="html"||k=="css"?t.toLowerCase():t};
+let P={done:[],xp:0},st={v:"home"};
+try{P=Object.assign(P,JSON.parse(localStorage.getItem("bytely2")||"{}"))}catch(e){}
+const save=()=>{try{localStorage.setItem(window.BYTELY_PKEY||"bytely2",JSON.stringify(P))}catch(e){}};
+const dn=(k,i)=>P.done.includes(k+i);
+const px=()=>{$("xp").textContent="Lv "+(Math.floor(P.xp/100)+1)+" · "+P.xp+" XP"};
+function homeV(){const tot=ORDER.reduce((a,k)=>a+LES[k].length,0),card=k=>`<button class="card k-${k}" data-a="open" data-k="${k}"><span class="badge">${BADGE[k]}</span><strong>${S[k].n}</strong><span>${TAG[k]}</span><progress value="${LES[k].filter((_,i)=>dn(k,i)).length}" max="${LES[k].length}"></progress><span>${LES[k].length} lessons</span><b class="go">Start with ${S[k].n} →</b></button>`;
+return `<section class="hero2"><div><p class="pill">Free · No experience needed</p><h1>Learn to code and use Office, one small step at a time.</h1><p>Short lessons that tell you exactly what to type or click. Practice from easy to hard and earn XP.</p><button class="btn sun" data-a="open" data-k="html">Start with HTML</button><button class="btn ghost" data-a="open" data-k="py">Start with Python</button><div class="stats"><div><b>${ORDER.length}</b><span>subjects</span></div><div><b>${tot}</b><span>lessons</span></div><div><b>4</b><span>levels</span></div></div></div><div class="win"><div class="dots"><i></i><i></i><i></i></div><pre id="typ">print("Hello, world!")</pre><div class="res" id="typr">✓ Hello, world!</div></div><span class="fl badge k-html f1">&lt;/&gt;</span><span class="fl badge k-py f2">Py</span><span class="fl badge k-js f3">JS</span><span class="fl badge k-sql f4">DB</span></section>
+<div class="sec"><h2>Coding</h2><span>20 lessons each, easy to hard</span></div><div class="grid">`+["html","py","js","sql","css","c","cpp"].map(card).join("")+`</div><div class="sec"><h2>Office skills</h2><span>Step-by-step practice</span></div><div class="grid">`+["ppt","excel","word"].map(card).join("")+`</div><div class="sec"><h2>How it works</h2></div><div class="how"><div><b>1. Read</b><span>Open a subject and read the short syllabus.</span></div><div><b>2. Type or click</b><span>Each lesson shows exactly what to do.</span></div><div><b>3. Check</b><span>Get instant feedback and earn XP.</span></div></div><footer class="f">Bytely · Learn at your own speed. Progress is saved in this browser.</footer>`}
+function lessonV(k,i){const l=LES[k][i],d=`data-k="${k}" data-i="${i}"`;
+let b=`<button class="btn alt" data-a="open" data-k="${k}">← ${S[k].n}</button><div class="crumb k-${k}"><span class="badge">${BADGE[k]}</span> Lesson ${i+1} of ${LES[k].length}</div><progress class="k-${k}" value="${i+1}" max="${LES[k].length}"></progress><h2>${l.t}</h2>`;
+if(isOff(k))b+=`<p class="sub">Do each step in the real ${S[k].n} app on your computer. Tick the box after each step.</p><ol class="steps">`+l.s.map(x=>`<li><label><input type="checkbox" class="tk"> ${x}</label></li>`).join("")+`</ol><button class="btn" data-a="finish" ${d}>I did all the steps</button>`;
+else b+=`${(k=="c"||k=="cpp")&&!l.c.includes("main")?`<p class="sub">This code goes inside main(). The rest of the program is already around it.</p>`:""}<p>${l.w}</p><p><b>Type this exactly:</b></p><pre>${esc(l.c)}</pre><textarea id="code" spellcheck="false" aria-label="Type your code here" placeholder="Type the code here"></textarea><button class="btn" data-a="check" ${d}>Check my code</button><button class="btn alt" data-a="fill" ${d}>Type it for me</button>`;
+return b+`<div id="res" role="status"></div>`}
+function render(){$("app").innerHTML=st.v=="home"?homeV():st.v=="course"?courseV(st.k):lessonV(st.k,st.i);px();window.scrollTo(0,0)}
+function win(k,i,extra){if(!dn(k,i)){P.done.push(k+i);P.xp+=10;save();px()}
+boom();const nx=i+1<LES[k].length;$("res").innerHTML=`<div class="ok">🎉 Well done! +10 XP</div>`+extra+`<button class="btn" data-a="${nx?"lesson":"open"}" data-k="${k}" data-i="${i+1}">${nx?"Next lesson":"Back to lessons"}</button>`}
+const A={scroll(){window.scrollTo(0,400)},home(){st={v:"home"};render()},open(k){st={v:"course",k};render()},lesson(k,i){st={v:"lesson",k,i:+i};render()},
+fill(k,i){$("code").value=LES[k][i].c},
+check(k,i){const l=LES[k][i];if(norm($("code").value,k)==norm(l.c,k))win(k,+i,`<p>What the computer shows:</p><pre class="outp">${esc(l.o)}</pre>`);else $("res").innerHTML=`<div class="bad">Not quite yet. Compare your code with the code above and check spelling, brackets and quotes. You can also press “Type it for me”.</div>`},
+finish(k,i){const all=[...document.querySelectorAll(".tk")].every(x=>x.checked);if(all)win(k,+i,"");else $("res").innerHTML=`<div class="bad">Tick every step first. Do each one in the app, then tick it.</div>`},
+theme(){const d=document.documentElement,dark=getComputedStyle(d).getPropertyValue("--bg").trim()=="#0D0C27";d.dataset.theme=dark?"light":"dark"}};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-a]");if(b&&A[b.dataset.a])A[b.dataset.a](b.dataset.k,b.dataset.i)});
+const RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function boom(){if(RM)return;const c=["#FFC933","#3D4BFF","#0E9F6E","#E34F26","#8A4FFF"];for(let i=0;i<30;i++){const e=document.createElement("i");e.className="cf";e.style.setProperty("--x",(Math.random()*500-250)+"px");e.style.setProperty("--y",(-Math.random()*280-60)+"px");e.style.setProperty("--r",(Math.random()*720)+"deg");e.style.background=c[i%5];e.style.left="50%";e.style.top="50%";document.body.appendChild(e);setTimeout(()=>e.remove(),1400)}}
+const DEMO=[['print("Hello, world!")',"Hello, world!"],["<h1>Hello!</h1>","A big heading: Hello!"],["console.log(5 + 3);","8"],["SELECT * FROM students;","Every row of students"],["h1 { color: red; }","The heading turns red"]];
+let di=0,ci=0;
+if(!RM)setInterval(()=>{const t=$("typ"),r=$("typr");if(!t)return;const d=DEMO[di];if(ci<=d[0].length){t.textContent=d[0].slice(0,ci++);r.textContent=""}else if(ci<=d[0].length+16){ci++;r.textContent="✓ "+d[1]}else{ci=0;di=(di+1)%DEMO.length}},85);
+render();
+</script>
+<script>
+/* ===== Bytely student accounts: Firebase Phone Auth + Firestore (added) ===== */
+(function(){
+'use strict';
+var CFG=window.BYTELY_FIREBASE_CONFIG||{};
+var OPT=Object.assign({defaultCountry:'+91',resendSeconds:30},window.BYTELY_AUTH_OPTIONS||{});
+function isPlaceholder(v){return !v||/^(YOUR_|PASTE_)/i.test(String(v));}
+function cfgOk(c){return !!c&&!(isPlaceholder(c.apiKey)||isPlaceholder(c.projectId)||isPlaceholder(c.appId)||isPlaceholder(c.authDomain));}
+var STORE_KEY='bytely_fb_config',cfgFromBrowser=false;
+if(!cfgOk(CFG)){try{var saved=JSON.parse(localStorage.getItem(STORE_KEY)||'null');if(cfgOk(saved)){CFG=saved;cfgFromBrowser=true;}}catch(e){}}
+var configured=cfgOk(CFG);
+var onFile=location.protocol==='file:';
+function parseConfig(text){var out={},re=/["']?(apiKey|authDomain|projectId|storageBucket|messagingSenderId|appId|measurementId)["']?\s*:\s*["']([^"']+)["']/g,m;
+ while((m=re.exec(String(text||'')))){out[m[1]]=m[2].trim();}
+ if(!out.apiKey||!/^AIza/.test(out.apiKey))return{err:'I could not find a valid apiKey (it starts with AIza). Paste the whole firebaseConfig block from Firebase.'};
+ if(!out.projectId)return{err:'projectId is missing in what you pasted.'};
+ if(!out.appId||out.appId.indexOf(':')<0)return{err:'appId is missing or not valid.'};
+ if(!out.authDomain)out.authDomain=out.projectId+'.firebaseapp.com';
+ return{cfg:out};}
+var root=document.getElementById('authroot'),appEl=document.getElementById('app'),headEl=document.querySelector('header');
+var hdash=document.getElementById('hdash'),hav=document.getElementById('havatar');
+function h(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+var AU={auth:null,db:null,user:null,profile:null,confirm:null,verifier:null,e164:'',cc:OPT.defaultCountry,local:'',timer:null,left:0,fails:0,step:'boot',draft:{},busy:false,guest:false};
+var YEARS=['1st','2nd','3rd','Other'],EXPS=['Beginner','Intermediate','Advanced'];
+var COURSES=['BCA','BSc (Computer Science / IT)','B.Tech / BE','MCA','MSc (Computer Science / IT)','Diploma','Other degree','School student','Other'];
+var CC=[['+91','India',/^[6-9]\d{9}$/],['+1','USA / Canada',/^[2-9]\d{9}$/],['+44','United Kingdom',/^\d{10}$/],['+61','Australia',/^\d{9}$/],['+971','UAE',/^\d{9}$/],['+966','Saudi Arabia',/^\d{9}$/],['+65','Singapore',/^\d{8}$/],['+92','Pakistan',/^\d{10}$/],['+880','Bangladesh',/^\d{10}$/],['+977','Nepal',/^\d{10}$/],['+94','Sri Lanka',/^\d{9}$/],['+49','Germany',/^\d{10,11}$/]];
+var ISO={'+91':'IN','+1':'US','+44':'UK','+61':'AU','+971':'AE','+966':'SA','+65':'SG','+92':'PK','+880':'BD','+977':'NP','+94':'LK','+49':'DE'};
+var NAME_RE=/^[A-Za-z\u00C0-\u024F\u0900-\u097F\u0A00-\u0A7F][A-Za-z\u00C0-\u024F\u0900-\u097F\u0A00-\u0A7F .'\-]{1,59}$/;
+
+/* ---------- helpers ---------- */
+function normLocal(cc,raw){var d=String(raw||'').replace(/\D/g,'');
+ if(cc==='+91'){if(d.length===12&&d.indexOf('91')===0)d=d.slice(2);if(d.length===11&&d.charAt(0)==='0')d=d.slice(1);}
+ else if(d.charAt(0)==='0')d=d.slice(1);
+ return d;}
+function checkPhone(cc,raw){var d=normLocal(cc,raw),row=null;
+ CC.forEach(function(r){if(r[0]===cc)row=r;});
+ if(!d)return{err:'Please enter your mobile number.'};
+ var ok=row?row[2].test(d):/^\d{6,14}$/.test(d);
+ if(!ok)return{err:cc==='+91'?'Enter a valid 10-digit Indian mobile number (it starts with 6, 7, 8 or 9).':'That number does not look valid for '+(row?row[1]:'this country')+'.'};
+ var e=cc+d;if(!/^\+[1-9]\d{6,14}$/.test(e))return{err:'That phone number is not valid.'};
+ return{e164:e,local:d};}
+function fmtPhone(e){var m=/^(\+91)(\d{5})(\d{5})$/.exec(e||'');return m?m[1]+' '+m[2]+' '+m[3]:(e||'');}
+function errMsg(e){var c=(e&&e.code)||'';c=String(c).replace('firestore/','');
+ var m={'auth/invalid-phone-number':'That phone number is not valid. Check the country code and number.',
+ 'auth/missing-phone-number':'Please enter your mobile number.',
+ 'auth/too-many-requests':'Too many attempts from this device or number. Please wait a while, then try again.',
+ 'auth/quota-exceeded':'The SMS limit has been reached for now. Please try again later.',
+ 'auth/captcha-check-failed':'The security check failed. Refresh the page and try again.',
+ 'auth/invalid-app-credential':'The security check (reCAPTCHA) failed. Refresh the page and try again.',
+ 'auth/network-request-failed':'Network problem. Check your internet connection and try again.',
+ 'auth/operation-not-allowed':'Phone sign-in is not enabled for this project yet. (Site owner: enable Phone in Firebase Authentication, and check the SMS region policy.)',
+ 'auth/unauthorized-domain':'This website address is not authorised in Firebase. (Site owner: add it under Authentication > Settings > Authorized domains.)',
+ 'auth/billing-not-enabled':'SMS sending needs billing on the Firebase project. (Site owner: upgrade to the Blaze plan.)',
+ 'auth/invalid-verification-code':'That code is not correct. Check the SMS and try again.',
+ 'auth/code-expired':'This code has expired. Tap Resend OTP to get a new one.',
+ 'auth/session-expired':'This code has expired. Tap Resend OTP to get a new one.',
+ 'auth/missing-verification-code':'Enter the 6-digit code.',
+ 'auth/user-disabled':'This account has been disabled.',
+ 'auth/web-storage-unsupported':'Your browser blocks storage. Allow cookies/site data for this site and try again.',
+ 'permission-denied':'You do not have permission to do that. Please sign in again.',
+ 'unavailable':'The server could not be reached. Check your connection and try again.',
+ 'unauthenticated':'Your session ended. Please sign in again.',
+ 'app/duplicate-phone':'An account already exists for this verified mobile number.'};
+ return m[c]||'Something went wrong. Please try again.';}
+function $q(sel,el){return(el||document).querySelector(sel);}
+function initials(n){var p=String(n||'?').trim().split(/\s+/);return((p[0]||'?').charAt(0)+(p.length>1?p[p.length-1].charAt(0):'')).toUpperCase();}
+function showErr(id,msg){var el=document.getElementById(id);if(!el)return;el.textContent=msg||'';el.classList.toggle('on',!!msg);if(msg){el.classList.remove('on');void el.offsetWidth;el.classList.add('on');}}
+function setBusy(btn,on,label){if(!btn)return;btn.disabled=!!on;btn.classList.toggle('busy',!!on);if(label!=null&&!btn.dataset.l)btn.dataset.l=btn.textContent;if(on&&label)btn.textContent=label;if(!on&&btn.dataset.l){btn.textContent=btn.dataset.l;delete btn.dataset.l;}}
+function stopTimer(){if(AU.timer){clearInterval(AU.timer);AU.timer=null;}}
+
+/* ---------- progress per student (keeps your existing lesson/XP logic) ---------- */
+function safeParse(s){try{return JSON.parse(s||'{}')||{};}catch(e){return{};}}
+function loadProgressFor(uid){var key='bytely2:'+uid,raw=null;
+ try{raw=localStorage.getItem(key);
+  if(raw===null){var legacy=localStorage.getItem('bytely2');
+   if(legacy&&!localStorage.getItem('bytely2_claimed')){raw=legacy;localStorage.setItem('bytely2_claimed',uid);}}
+ }catch(e){}
+ P=Object.assign({done:[],xp:0},safeParse(raw));
+ window.BYTELY_PKEY=key;save();}
+function resetProgress(){window.BYTELY_PKEY='bytely2';P={done:[],xp:0};}
+
+/* ---------- screen plumbing ---------- */
+var origRender=render;
+function lockApp(on){try{appEl.inert=!!on;headEl.inert=!!on;}catch(e){}}
+function showOverlay(){root.hidden=false;lockApp(true);hdash.hidden=true;hav.hidden=true;}
+function hideOverlay(){root.hidden=true;root.innerHTML='';lockApp(false);}
+function shell(inner,cls){
+ root.innerHTML='<div class="fg-bg" aria-hidden="true"><span class="fg-orb o1"></span><span class="fg-orb o2"></span><span class="fg-orb o3"></span><i class="fg-sym s1">&lt;/&gt;</i><i class="fg-sym s2">{ }</i><i class="fg-sym s3">Py</i><i class="fg-sym s4">JS</i><i class="fg-sym s5">DB</i><i class="fg-sym s6">C++</i></div>'
+ +'<div class="fg-wrap"><section class="fg-card '+(cls||'')+'" id="fgcard" aria-label="Bytely sign in">'+inner+'</section><p class="fg-foot"><button type="button" class="fg-link" data-au="privacy">Privacy notice</button> &middot; Protected by reCAPTCHA</p></div>';
+ root.scrollTop=0;
+ var f=$q('[data-focus]',root);if(f){setTimeout(function(){try{f.focus({preventScroll:true});}catch(e){}},60);}}
+var LOGO='<div class="fg-logo"><span class="fg-mark" aria-hidden="true">B</span><span>Byte<b>ly</b></span></div>';
+function steps(n){var s='<div class="fg-steps" aria-label="Step '+n+' of 4">';for(var i=1;i<=4;i++)s+='<i class="'+(i<=n?'on':'')+'"></i>';return s+'</div>';}
+
+function goBoot(msg){AU.step='boot';stopTimer();showOverlay();shell(LOGO+'<div class="fg-load" role="status"><div class="fg-spin"></div><p>'+h(msg||'Loading…')+'</p></div>');}
+function goError(msg,retryLabel){AU.step='error';stopTimer();showOverlay();
+ shell(LOGO+'<h2>We hit a problem</h2><p>'+h(msg)+'</p><button class="fg-btn" data-au="retry">'+h(retryLabel||'Try again')+'</button>'+(AU.user?'<button class="fg-btn ghost" data-au="signout">Sign out</button>':''));}
+
+function setupPanel(){
+ return'<div class="fg-warn"><b>One-time setup needed.</b> Real SMS login runs on <b>your own Firebase project</b>. Nothing can send OTPs until you connect it.'
+ +(onFile?'<br><br><b>You opened this as a file.</b> Phone login does not work from a file or an app preview. Open it from a web address: your Firebase Hosting link, or <code>http://localhost</code> (see README).':'')
+ +'<ol style="margin:12px 0 0;padding-left:20px;line-height:1.55"><li>Create a project at <a class="fg-link" href="https://console.firebase.google.com" target="_blank" rel="noopener noreferrer">console.firebase.google.com</a>, add a <b>Web app</b> and copy its <code>firebaseConfig</code>.</li><li>In Authentication turn on <b>Phone</b>. In Firestore create a database.</li><li>Paste the config here and press Connect.</li></ol></div>'
+ +'<form id="fgCfg" novalidate><label class="l" for="fgCfgTxt">Paste your firebaseConfig</label><textarea id="fgCfgTxt" spellcheck="false" placeholder="const firebaseConfig = {\n  apiKey: &quot;AIza...&quot;,\n  authDomain: &quot;your-app.firebaseapp.com&quot;,\n  projectId: &quot;your-app&quot;,\n  appId: &quot;1:123:web:abc&quot;\n};" style="font-family:\'JetBrains Mono\',monospace;font-size:13px;min-height:130px"></textarea>'
+ +'<div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" type="submit">Connect Firebase</button></form>';}
+function goWelcome(){AU.step='welcome';stopTimer();showOverlay();
+ shell('<div>'+LOGO+'<h1>Learn to code.<br><em>One small step</em> at a time.</h1>'
+ +'<p>Create your free student account to get a personalised dashboard, track your XP and pick up exactly where you left off.</p>'
+ +(configured?'<button class="fg-btn" data-au="start" data-focus="1">Get Started &rarr;</button>'
+   +'<p style="margin:14px 0 0;text-align:center;font-size:15px">Already registered? <button class="fg-link" data-au="start">Sign in with your number</button></p>'
+   +(onFile?'<div class="fg-warn" style="margin-top:14px"><b>Heads up:</b> you opened this as a file. Phone login only works from a web address (hosting or <code>http://localhost</code>).</div>':'')
+   :'<button class="fg-btn" disabled>Get Started &rarr;</button>'+setupPanel())
+ +'<div class="fg-chips"><span class="fg-chip">10 subjects</span><span class="fg-chip">170 lessons</span><span class="fg-chip">Free for students</span></div>'
+ +(configured?'':'<button class="fg-btn ghost" data-au="guest" style="margin-top:12px">Just explore the lessons (no account)</button>')
+ +(cfgFromBrowser?'<p style="margin:14px 0 0;font-size:13px;color:#7fa793">Firebase keys are saved in this browser. <button class="fg-link" data-au="forgetcfg" style="font-size:13px">Change keys</button></p>':'')
+ +'</div><div class="fg-win" aria-hidden="true"><div class="d"><i></i><i></i><i></i></div><pre><s># your first Bytely lesson</s>\n<b>print</b>(<u>"Hello, world!"</u>)</pre><div class="r">Hello, world!</div></div>','wide');}
+
+function ccOptions(sel){return CC.map(function(r){return'<option value="'+r[0]+'"'+(r[0]===sel?' selected':'')+' title="'+h(r[1])+'">'+ISO[r[0]]+' '+r[0]+'</option>';}).join('');}
+function goPhone(msg){AU.step='phone';stopTimer();showOverlay();
+ shell('<div class="fg-top"><button class="fg-back" data-au="home">&larr; Back</button></div>'+LOGO+steps(1)
+ +'<h2>Enter your mobile number</h2><p>We will text you a one-time password (OTP) to verify it. Standard SMS rates may apply.</p>'
+ +'<form id="fgPhone" novalidate autocomplete="on"><label class="l" for="fgNum">Mobile number</label><div class="phone"><select id="fgCc" aria-label="Country code">'+ccOptions(AU.cc)+'</select>'
+ +'<input id="fgNum" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="98765 43210" maxlength="16" value="'+h(AU.local)+'" data-focus="1"></div>'
+ +'<div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" id="fgSend" type="submit">Send OTP</button></form>'
+ +'<p style="margin:14px 0 0;font-size:13px;color:#7fa793">This site is protected by reCAPTCHA and the Google <a class="fg-link" href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a class="fg-link" href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a> apply.</p>');
+ if(msg)showErr('fgE',msg);}
+
+function goOtp(note){AU.step='otp';showOverlay();
+ var boxes='';for(var i=0;i<6;i++)boxes+='<input type="text" inputmode="numeric" pattern="[0-9]*" maxlength="1" aria-label="Digit '+(i+1)+'" autocomplete="'+(i===0?'one-time-code':'off')+'"'+(i===0?' data-focus="1"':'')+'>';
+ shell('<div class="fg-top"><button class="fg-back" data-au="changenum">&larr; Change number</button></div>'+LOGO+steps(2)
+ +'<h2>Verify your number</h2><p>Enter the 6-digit code we sent to <b style="color:#e9f7ef">'+h(fmtPhone(AU.e164))+'</b>.</p>'
+ +'<form id="fgOtp" novalidate><div class="fg-otp" role="group" aria-label="One-time password">'+boxes+'</div>'
+ +'<div class="fg-err" id="fgE" role="alert"></div><div class="fg-note" id="fgN" role="status"></div><button class="fg-btn" id="fgVerify" type="submit">Verify &amp; continue</button></form>'
+ +'<p class="fg-timer" id="fgTimer"></p>');
+ if(note){var n=document.getElementById('fgN');n.textContent=note;n.classList.add('on');}
+ startTimer(OPT.resendSeconds);}
+function startTimer(sec){stopTimer();AU.left=sec;paintTimer();AU.timer=setInterval(function(){AU.left--;paintTimer();if(AU.left<=0)stopTimer();},1000);}
+function paintTimer(){var el=document.getElementById('fgTimer');if(!el)return;
+ if(AU.left>0){var m=Math.floor(AU.left/60),s=AU.left%60;el.innerHTML='Resend OTP in <b style="color:#e9f7ef">'+m+':'+(s<10?'0':'')+s+'</b>';}
+ else el.innerHTML='Did not get the code? <button type="button" class="fg-link" data-au="resend">Resend OTP</button>';}
+
+/* ---------- registration form (also reused for editing) ---------- */
+function opt(list,sel){return list.map(function(v){return'<option'+(v===sel?' selected':'')+'>'+h(v)+'</option>';}).join('');}
+function seg(name,list,sel){return'<div class="fg-seg" role="radiogroup">'+list.map(function(v,i){return'<label><input type="radio" name="'+name+'" value="'+h(v)+'"'+(v===sel?' checked':'')+(i===0&&!sel?' required':'')+'><span>'+h(v)+'</span></label>';}).join('')+'</div>';}
+function fieldsHtml(v,mobile){v=v||{};
+ var inList=COURSES.indexOf(v.course)>=0,csel=inList?v.course:(v.course?'Other':''),cother=inList?'':(v.course||'');
+ return'<label class="l" for="fName">Full name</label><input id="fName" name="name" type="text" autocomplete="name" maxlength="60" placeholder="e.g. Manpreet Kaur" value="'+h(v.name)+'" required>'
+ +'<label class="l" for="fMob">Mobile number <span class="fg-verified">&#10003; Verified</span></label><input id="fMob" class="ro" type="text" value="'+h(fmtPhone(mobile))+'" readonly aria-readonly="true">'
+ +'<div class="row"><div><label class="l" for="fCourse">Course pursuing</label><select id="fCourse" name="course" required><option value="">Select course</option>'+opt(COURSES,csel)+'</select></div>'
+ +'<div><label class="l">Year of study</label>'+seg('year',YEARS,v.year)+'</div></div>'
+ +'<div id="fOtherWrap" '+(csel==='Other'?'':'hidden')+'><label class="l" for="fOther">Your course</label><input id="fOther" name="courseOther" type="text" maxlength="60" placeholder="Type your course" value="'+h(cother)+'"></div>'
+ +'<label class="l" for="fCol">College name <small>(optional)</small></label><input id="fCol" name="college" type="text" autocomplete="organization" maxlength="100" placeholder="e.g. S.G.A.D Government College, Tarn Taran" value="'+h(v.college)+'">'
+ +'<label class="l">Programming experience</label>'+seg('experience',EXPS,v.experience)
+ +'<label class="l" for="fGoal">What do you want to learn? <span class="count" id="fCnt">0/300</span></label><textarea id="fGoal" name="goal" maxlength="300" placeholder="e.g. I want to build my own website and learn Python for my BCA exams." required>'+h(v.goal)+'</textarea>';}
+function readForm(form,needConsent){var fd=new FormData(form),g=function(k){return String(fd.get(k)==null?'':fd.get(k));};
+ var name=g('name').trim().replace(/\s+/g,' '),course=g('course'),other=g('courseOther').trim(),year=g('year'),exp=g('experience'),goal=g('goal').trim(),col=g('college').trim().replace(/\s+/g,' ');
+ var err=null,field=null;
+ if(!NAME_RE.test(name)){err='Enter your full name (2 to 60 letters; spaces, dots, hyphens and apostrophes are fine).';field='fName';}
+ else if(!course){err='Choose the course you are pursuing.';field='fCourse';}
+ else if(course==='Other'&&other.length<2){err='Type the name of your course.';field='fOther';}
+ else if(YEARS.indexOf(year)<0){err='Select your year of study.';field=null;}
+ else if(col.length>100){err='College name is too long (maximum 100 characters).';field='fCol';}
+ else if(EXPS.indexOf(exp)<0){err='Select your programming experience.';field=null;}
+ else if(goal.length<2){err='Tell us what you want to learn (at least a few words).';field='fGoal';}
+ else if(goal.length>300){err='Please keep this under 300 characters.';field='fGoal';}
+ else if(needConsent&&!form.querySelector('[name=consent]').checked){err='Please accept the privacy notice to continue.';field=null;}
+ if(err)return{err:err,field:field};
+ return{v:{name:name,course:course==='Other'?other:course,year:year,college:col,experience:exp,goal:goal}};}
+function wireForm(form){var c=$q('#fCourse',form),o=$q('#fOtherWrap',form),gl=$q('#fGoal',form),cn=$q('#fCnt',form);
+ function cnt(){cn.textContent=gl.value.length+'/300';}
+ c.addEventListener('change',function(){o.hidden=c.value!=='Other';});gl.addEventListener('input',cnt);cnt();}
+
+function goRegister(){AU.step='register';stopTimer();showOverlay();
+ var d=AU.draft||{};
+ shell('<div class="fg-top"><span></span><button class="fg-back" data-au="signout">Sign out</button></div>'+LOGO+steps(3)
+ +'<h2>Create your student profile</h2><p>Your number is verified. Tell us a little about you so Bytely can personalise your learning.</p>'
+ +'<form id="fgReg" novalidate>'+fieldsHtml(d,AU.user&&AU.user.phoneNumber)
+ +'<label class="fg-check"><input type="checkbox" name="consent"'+(d._consent?' checked':'')+'><span>I have read the <button type="button" class="fg-link" data-au="privacy">Privacy notice</button> and agree to Bytely saving my profile.</span></label>'
+ +'<div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" type="submit">Continue &rarr;</button></form>','reg');
+ wireForm(document.getElementById('fgReg'));}
+
+function tilesHtml(sel){return'<div class="fg-tiles" role="group" aria-label="Learning interests">'+ORDER.map(function(k){var on=sel.indexOf(k)>=0;
+ return'<button type="button" class="fg-tile" data-au="toggleint" data-k="'+k+'" aria-pressed="'+on+'"><span class="badge k-'+k+'">'+BADGE[k]+'</span><strong>'+h(S[k].n)+'</strong><small>'+h(TAG[k])+'</small><span class="tk" aria-hidden="true">&#10003;</span></button>';}).join('')+'</div>';}
+function goInterests(){AU.step='interests';showOverlay();var sel=AU.draft.interests||[];
+ shell('<div class="fg-top"><button class="fg-back" data-au="backreg">&larr; Back</button></div>'+LOGO+steps(4)
+ +'<h2>What do you want to learn?</h2><p>Pick everything you are interested in. You can change this any time.</p>'+tilesHtml(sel)
+ +'<p class="count" id="fgSel" style="margin:12px 0 0;font-size:14px"></p><div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" id="fgFin" data-au="finish">Finish &amp; open my dashboard</button>','int');
+ paintSel();}
+function paintSel(){var el=document.getElementById('fgSel'),n=(AU.draft.interests||[]).length;if(el)el.textContent=n+' selected';}
+
+/* ---------- Firebase actions ---------- */
+function makeVerifier(){try{if(AU.verifier)AU.verifier.clear();}catch(e){}
+ var holder=document.getElementById('recaptcha-container');holder.innerHTML='';var d=document.createElement('div');holder.appendChild(d);
+ AU.verifier=new firebase.auth.RecaptchaVerifier(d,{size:'invisible'});return AU.verifier;}
+function sendOtp(){return AU.auth.signInWithPhoneNumber(AU.e164,makeVerifier()).then(function(r){AU.confirm=r;AU.fails=0;});}
+function resetVerifier(){try{if(AU.verifier)AU.verifier.clear();}catch(e){}AU.verifier=null;}
+
+function submitPhone(){var cc=document.getElementById('fgCc').value,raw=document.getElementById('fgNum').value,btn=document.getElementById('fgSend');
+ var r=checkPhone(cc,raw);AU.cc=cc;if(r.err){showErr('fgE',r.err);return;}
+ showErr('fgE','');AU.e164=r.e164;AU.local=r.local;setBusy(btn,true,'Sending OTP…');
+ sendOtp().then(function(){goOtp();}).catch(function(e){resetVerifier();setBusy(btn,false);showErr('fgE',errMsg(e));});}
+function resend(){if(AU.left>0||AU.busy)return;AU.busy=true;var n=document.getElementById('fgN');if(n){n.textContent='Sending a new code…';n.classList.add('on');}showErr('fgE','');
+ sendOtp().then(function(){AU.busy=false;goOtp('A new code has been sent.');}).catch(function(e){AU.busy=false;resetVerifier();showErr('fgE',errMsg(e));if(n)n.classList.remove('on');});}
+function code(){return[].map.call(document.querySelectorAll('.fg-otp input'),function(i){return i.value;}).join('');}
+function submitOtp(){if(AU.busy)return;var c=code(),btn=document.getElementById('fgVerify');
+ if(!/^\d{6}$/.test(c)){showErr('fgE','Enter the 6-digit code.');return;}
+ if(!AU.confirm){showErr('fgE','Please request a new code.');return;}
+ if(AU.fails>=5){showErr('fgE','Too many wrong codes. Tap Resend OTP to get a new code.');return;}
+ AU.busy=true;showErr('fgE','');setBusy(btn,true,'Verifying…');
+ AU.confirm.confirm(c).then(function(){AU.busy=false;stopTimer();/* onAuthStateChanged routes next */}).catch(function(e){AU.busy=false;AU.fails++;setBusy(btn,false);
+  showErr('fgE',errMsg(e));var ins=document.querySelectorAll('.fg-otp input');[].forEach.call(ins,function(i){i.value='';});if(ins[0])ins[0].focus();});}
+
+function profileDoc(){return AU.db.collection('students').doc(AU.user.uid);}
+function loadProfile(){var u=AU.user;
+ return profileDoc().get().then(function(s){if(!AU.user||AU.user.uid!==u.uid)return;
+  if(s.exists){AU.profile=s.data();enterApp();}else{AU.profile=null;if(AU.step!=='register'&&AU.step!=='interests')goRegister();}
+ }).catch(function(e){goError(errMsg(e),'Try again');});}
+function createProfile(){var u=AU.user,d=AU.draft,TS=firebase.firestore.FieldValue.serverTimestamp;
+ var data={name:d.name,phone:u.phoneNumber,course:d.course,year:d.year,college:d.college||'',experience:d.experience,goal:d.goal,interests:d.interests.slice(),createdAt:TS(),updatedAt:TS()};
+ var sRef=profileDoc(),pRef=AU.db.collection('phoneIndex').doc(u.phoneNumber);
+ return AU.db.runTransaction(function(tx){return tx.get(pRef).then(function(p){
+  if(p.exists&&p.data().uid!==u.uid){var er=new Error('dup');er.code='app/duplicate-phone';throw er;}
+  tx.set(sRef,data);if(!p.exists)tx.set(pRef,{uid:u.uid,createdAt:TS()});});})
+ .then(function(){return sRef.get();}).then(function(s){AU.profile=s.data();});}
+function finish(){var d=AU.draft;if(!d.interests||!d.interests.length){showErr('fgE','Pick at least one subject you want to learn.');return;}
+ var btn=document.getElementById('fgFin');showErr('fgE','');setBusy(btn,true,'Saving your profile…');
+ createProfile().then(function(){AU.draft={};enterApp();}).catch(function(e){setBusy(btn,false);showErr('fgE',errMsg(e));});}
+
+/* ---------- entering / leaving the app ---------- */
+function refreshHeader(){var on=!!AU.profile&&!AU.guest;hdash.hidden=!on;hav.hidden=!on;if(on)hav.textContent=initials(AU.profile.name);}
+function enterApp(){AU.step='app';AU.guest=false;stopTimer();hideOverlay();loadProgressFor(AU.user.uid);st={v:'dash'};render();}
+function leaveApp(){AU.profile=null;AU.draft={};resetProgress();stopTimer();hdash.hidden=true;hav.hidden=true;}
+function guestEnter(){AU.guest=true;AU.step='app';hideOverlay();hdash.hidden=true;hav.hidden=true;st={v:'home'};render();}
+function signOut(){if(!AU.auth){goWelcome();return;}AU.auth.signOut().catch(function(){goWelcome();});}
+
+/* ---------- in-app views (dashboard, profile, edit, preferences) ---------- */
+function totalLessons(){return ORDER.reduce(function(a,k){return a+LES[k].length;},0);}
+function nextLesson(){var ints=(AU.profile&&AU.profile.interests)||[];
+ for(var a=0;a<ints.length;a++){var k=ints[a];if(!LES[k])continue;for(var i=0;i<LES[k].length;i++)if(!dn(k,i))return{k:k,i:i};}return null;}
+function tagHtml(k){return'<span class="fgd-tag"><span class="badge k-'+k+'">'+BADGE[k]+'</span>'+h(S[k].n)+'</span>';}
+function dashV(){var p=AU.profile,ints=(p.interests||[]).filter(function(k){return LES[k];}),lv=Math.floor(P.xp/100)+1,nx=nextLesson();
+ var list=ints.map(function(k){var n=LES[k].filter(function(_,i){return dn(k,i);}).length;
+  return'<button class="fgd-subj k-'+k+'" data-a="open" data-k="'+k+'"><span class="badge">'+BADGE[k]+'</span><span><strong>'+h(S[k].n)+'</strong><progress value="'+n+'" max="'+LES[k].length+'"></progress><small>'+n+' of '+LES[k].length+' lessons done</small></span><span class="go" aria-hidden="true">&rarr;</span></button>';}).join('');
+ var nextBox=nx?'<div class="fgd-next"><div><small>Pick up where you left off</small><b>'+h(S[nx.k].n)+' &middot; Lesson '+(nx.i+1)+': '+h(LES[nx.k][nx.i].t)+'</b></div><button class="fg-btn" data-a="lesson" data-k="'+nx.k+'" data-i="'+nx.i+'">Continue &rarr;</button></div>'
+  :'<div class="fgd-next"><div><small>Amazing work!</small><b>You have finished every lesson in your interests.</b></div><button class="fg-btn" data-a="home">Explore more subjects</button></div>';
+ return'<section class="fgd" aria-labelledby="fgHi"><div class="fgd-hero"><div><p class="fgd-pill">Student dashboard</p>'
+ +'<h1 class="fgd-hi" id="fgHi">Hi, <span>'+h(p.name)+'</span>! &#128075;</h1><p class="fgd-sub2">Welcome to ByteLy. Let\'s start learning something new today.</p>'
+ +'<button class="fg-btn" data-a="home">Explore all subjects</button><button class="fg-btn ghost" data-au="gopref">Update my interests</button></div>'
+ +'<div class="fgd-stats"><div class="fgd-stat"><b>'+lv+'</b><span>Level</span></div><div class="fgd-stat"><b>'+P.xp+'</b><span>XP</span></div><div class="fgd-stat"><b>'+P.done.length+'/'+totalLessons()+'</b><span>Lessons</span></div></div></div>'
+ +nextBox
+ +'<h3>Your learning path</h3><div class="fgd-list">'+(list||'<p>You have not picked any interests yet.</p>')+'</div>'
+ +'<div class="fgd-grid"><div class="fgd-card"><h3>Your goal</h3><p style="color:var(--gt);font-size:16px;line-height:1.5">&ldquo;'+h(p.goal)+'&rdquo;</p></div>'
+ +'<div class="fgd-card"><h3>About you</h3><dl><dt>Course</dt><dd>'+h(p.course)+'</dd><dt>Year</dt><dd>'+h(p.year)+'</dd><dt>College</dt><dd>'+h(p.college||'Not added')+'</dd><dt>Level</dt><dd>'+h(p.experience)+'</dd></dl></div></div>'
+ +'<div class="fgd-actions"><button class="fg-btn ghost" data-a="profile">My profile</button><button class="fg-btn ghost" data-au="signout">Log out</button></div></section>';}
+function profileV(){var p=AU.profile,since='';try{if(p.createdAt&&p.createdAt.toDate)since=p.createdAt.toDate().toLocaleDateString(undefined,{month:'long',year:'numeric'});}catch(e){}
+ var tags=(p.interests||[]).filter(function(k){return S[k];}).map(tagHtml).join('');
+ return'<section class="fgd"><button class="fg-btn ghost" data-a="dash">&larr; Dashboard</button><div class="fgd-id" style="margin-top:16px"><div class="fgd-av" aria-hidden="true">'+h(initials(p.name))+'</div><div><h1 style="font-size:30px">'+h(p.name)+'</h1><p>'+h(fmtPhone(p.phone))+' <span class="fg-verified">&#10003; Verified</span>'+(since?' &middot; Member since '+h(since):'')+'</p></div></div>'
+ +'<div class="fgd-grid"><div class="fgd-card"><h3>Profile details</h3><dl><dt>Course</dt><dd>'+h(p.course)+'</dd><dt>Year</dt><dd>'+h(p.year)+'</dd><dt>College</dt><dd>'+h(p.college||'Not added')+'</dd><dt>Experience</dt><dd>'+h(p.experience)+'</dd></dl></div>'
+ +'<div class="fgd-card"><h3>What I want to learn</h3><p style="color:var(--gt);line-height:1.5">'+h(p.goal)+'</p></div></div>'
+ +'<h3>Learning interests</h3><div class="fgd-tags">'+(tags||'<p>None selected.</p>')+'</div>'
+ +'<div class="fgd-actions"><button class="fg-btn" data-au="goedit">Edit profile</button><button class="fg-btn ghost" data-au="gopref">Update preferences</button><button class="fg-btn ghost" data-au="privacy">Privacy notice</button><button class="fg-btn ghost" data-au="signout">Log out</button></div></section>';}
+function editV(){var p=AU.profile;
+ return'<section class="fgd"><button class="fg-btn ghost" data-a="profile">&larr; Cancel</button><h2 style="margin-top:14px;font-size:28px">Edit profile</h2><p>Your verified mobile number cannot be changed here.</p>'
+ +'<form id="fgEdit" novalidate>'+fieldsHtml(p,p.phone)+'<div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" type="submit">Save changes</button></form></section>';}
+function prefV(){var p=AU.profile;AU.draft.interests=(p.interests||[]).slice();
+ return'<section class="fgd"><button class="fg-btn ghost" data-a="profile">&larr; Cancel</button><h2 style="margin-top:14px;font-size:28px">Learning preferences</h2><p>Choose the subjects you want on your dashboard.</p><div style="margin-top:14px">'+tilesHtml(AU.draft.interests)+'</div>'
+ +'<p class="count" id="fgSel" style="margin:12px 0 0;font-size:14px;color:var(--gm)"></p><div class="fg-err" id="fgE" role="alert"></div><button class="fg-btn" id="fgPrefSave" data-au="saveprefs">Save preferences</button></section>';}
+render=function(){
+ if(AU.profile&&!AU.guest&&(st.v==='dash'||st.v==='profile'||st.v==='edit'||st.v==='pref')){
+  appEl.innerHTML=st.v==='dash'?dashV():st.v==='profile'?profileV():st.v==='edit'?editV():prefV();
+  px();window.scrollTo(0,0);
+  if(st.v==='edit'){var f=document.getElementById('fgEdit');wireForm(f);}
+  if(st.v==='pref')paintSel();
+ }else{if(st.v==='dash'||st.v==='profile'||st.v==='edit'||st.v==='pref')st={v:'home'};origRender();}
+ refreshHeader();};
+A.dash=function(){st={v:'dash'};render();};
+A.profile=function(){st={v:'profile'};render();};
+
+function saveEdit(form){var r=readForm(form,false);if(r.err){showErr('fgE',r.err);if(r.field)document.getElementById(r.field).focus();return;}
+ var btn=form.querySelector('button[type=submit]');setBusy(btn,true,'Saving…');
+ var v=r.v;profileDoc().update({name:v.name,course:v.course,year:v.year,college:v.college,experience:v.experience,goal:v.goal,updatedAt:firebase.firestore.FieldValue.serverTimestamp()})
+ .then(function(){return profileDoc().get();}).then(function(s){AU.profile=s.data();st={v:'profile'};render();})
+ .catch(function(e){setBusy(btn,false);showErr('fgE',errMsg(e));});}
+function savePrefs(){var sel=AU.draft.interests||[];if(!sel.length){showErr('fgE','Pick at least one subject.');return;}
+ var btn=document.getElementById('fgPrefSave');setBusy(btn,true,'Saving…');
+ profileDoc().update({interests:sel.slice(),updatedAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){return profileDoc().get();})
+ .then(function(s){AU.profile=s.data();st={v:'dash'};render();}).catch(function(e){setBusy(btn,false);showErr('fgE',errMsg(e));});}
+
+/* ---------- privacy notice ---------- */
+function openPrivacy(){var m=document.createElement('div');m.className='fg-modal';m.id='fgModal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-labelledby','fgPT');
+ m.innerHTML='<div><h2 id="fgPT">Privacy notice</h2><p>Bytely is a learning website for students. This notice explains what we save and why.</p>'
+ +'<h4>What we collect</h4><ul><li>Your verified mobile number</li><li>Your name, course, year of study, programming experience and (optional) college name</li><li>What you want to learn and the subjects you pick</li></ul>'
+ +'<h4>Why</h4><p>Only to create your account, keep you signed in, and personalise your dashboard and greeting. We do not sell your data or use it for advertising.</p>'
+ +'<h4>How it is protected</h4><p>Sign-in and OTP verification are handled by Google Firebase Authentication. Your profile is stored in Google Cloud Firestore behind security rules, so only you (while signed in) can read or change your profile. OTP codes are created and checked by Firebase; this website never stores or sees any OTP secret.</p>'
+ +'<h4>On your device</h4><p>Your lesson progress and XP are kept in your browser on this device. You stay signed in until you choose Log out.</p>'
+ +'<h4>Your choices</h4><p>You can edit your profile and interests any time from your profile page. To ask for your profile to be deleted, contact the person who runs this website.</p>'
+ +'<h4>SMS and security checks</h4><p>A standard text message is sent to your number to verify it. Google reCAPTCHA protects the sign-in form from abuse.</p>'
+ +'<button class="fg-btn" data-au="closemodal" style="margin-top:18px" data-focus="1">Close</button></div>';
+ document.body.appendChild(m);var b=m.querySelector('button');if(b)b.focus();}
+function closePrivacy(){var m=document.getElementById('fgModal');if(m)m.remove();}
+
+/* ---------- events ---------- */
+document.addEventListener('click',function(e){var b=e.target.closest('[data-au]');if(!b)return;var a=b.dataset.au;
+ if(a==='start')goPhone();
+ else if(a==='home')goWelcome();
+ else if(a==='guest')guestEnter();
+ else if(a==='changenum'){stopTimer();resetVerifier();AU.confirm=null;goPhone();}
+ else if(a==='resend')resend();
+ else if(a==='signout')signOut();
+ else if(a==='retry'){if(AU.user)goBoot('Loading your profile…'),loadProfile();else location.reload();}
+ else if(a==='privacy')openPrivacy();
+ else if(a==='closemodal')closePrivacy();
+ else if(a==='toggleint'){var k=b.dataset.k,l=AU.draft.interests||(AU.draft.interests=[]),ix=l.indexOf(k);if(ix>=0)l.splice(ix,1);else l.push(k);b.setAttribute('aria-pressed',ix<0);paintSel();showErr('fgE','');}
+ else if(a==='finish')finish();
+ else if(a==='backreg')goRegister();
+ else if(a==='goedit'){st={v:'edit'};render();}
+ else if(a==='forgetcfg'){try{localStorage.removeItem(STORE_KEY);}catch(e){}location.reload();}
+ else if(a==='gopref'){st={v:'pref'};render();}
+ else if(a==='saveprefs')savePrefs();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePrivacy();
+ var t=e.target;if(t&&t.closest&&t.closest('.fg-otp')){var ins=[].slice.call(document.querySelectorAll('.fg-otp input')),i=ins.indexOf(t);
+  if(e.key==='Backspace'&&!t.value&&i>0){ins[i-1].focus();ins[i-1].value='';}
+  else if(e.key==='ArrowLeft'&&i>0)ins[i-1].focus();else if(e.key==='ArrowRight'&&i<5)ins[i+1].focus();}});
+document.addEventListener('input',function(e){var t=e.target;if(!t.closest||!t.closest('.fg-otp'))return;
+ var ins=[].slice.call(document.querySelectorAll('.fg-otp input')),i=ins.indexOf(t);t.value=t.value.replace(/\D/g,'').slice(-1);
+ if(t.value&&i<5)ins[i+1].focus();if(code().length===6)submitOtp();});
+document.addEventListener('paste',function(e){var t=e.target;if(!t.closest||!t.closest('.fg-otp'))return;
+ var d=((e.clipboardData||window.clipboardData).getData('text')||'').replace(/\D/g,'').slice(0,6);if(!d)return;e.preventDefault();
+ var ins=document.querySelectorAll('.fg-otp input');for(var i=0;i<6;i++)ins[i].value=d.charAt(i)||'';(ins[Math.min(d.length,5)]).focus();if(d.length===6)submitOtp();});
+document.addEventListener('submit',function(e){var f=e.target;if(!f||!f.id)return;
+ if(f.id==='fgPhone'){e.preventDefault();submitPhone();}
+ else if(f.id==='fgOtp'){e.preventDefault();submitOtp();}
+ else if(f.id==='fgReg'){e.preventDefault();var r=readForm(f,true);if(r.err){showErr('fgE',r.err);if(r.field)document.getElementById(r.field).focus();return;}
+  AU.draft=Object.assign({},AU.draft,r.v,{_consent:true});goInterests();}
+ else if(f.id==='fgEdit'){e.preventDefault();saveEdit(f);}
+ else if(f.id==='fgCfg'){e.preventDefault();var r2=parseConfig(document.getElementById('fgCfgTxt').value);if(r2.err){showErr('fgE',r2.err);return;}
+  try{localStorage.setItem(STORE_KEY,JSON.stringify(r2.cfg));}catch(x){showErr('fgE','Your browser blocked saving. Allow site data and try again.');return;}location.reload();}});
+
+/* ---------- boot ---------- */
+function onUser(user){AU.user=user||null;
+ if(!user){leaveApp();goWelcome();return;}
+ if(AU.step!=='register'&&AU.step!=='interests')goBoot('Signing you in…');
+ loadProfile();}
+function boot(){
+ if(!configured){goWelcome();return;}
+ if(!window.firebase||!firebase.auth||!firebase.firestore){goError('Could not load the sign-in service. Check your internet connection and try again.','Reload');return;}
+ goBoot('Checking your session…');
+ try{firebase.initializeApp(CFG);AU.auth=firebase.auth();AU.db=firebase.firestore();try{AU.auth.useDeviceLanguage();}catch(e){}}
+ catch(e){goError('The Firebase configuration is not valid. Check firebase-config.js.','Reload');return;}
+ var go=function(){AU.auth.onAuthStateChanged(onUser,function(e){goError(errMsg(e),'Reload');});};
+ AU.auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(go,go);}
+boot();
+})();
+</script></body></html>
