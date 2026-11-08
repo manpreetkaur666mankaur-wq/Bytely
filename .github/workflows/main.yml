@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bytely – Learn computer skills and coding</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{--bg:#F6F5FF;--surface:#fff;--ink:#14123A;--mute:#55537d;--line:#dcd9f5;--brand:#3D4BFF;--on:#fff;--sun:#FFC933;--ok:#0B7A55;--bad:#C2255C;--code:#14123A;--ci:#e9e8ff;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0D0C27;--surface:#16143D;--ink:#EEEDFF;--mute:#a3a1d0;--line:#2a2766;--brand:#8D96FF;--on:#0D0C27;--ok:#3DD9A0;--bad:#FF7AA8;--code:#0A091D}}
+:root[data-theme="dark"]{--bg:#0D0C27;--surface:#16143D;--ink:#EEEDFF;--mute:#a3a1d0;--line:#2a2766;--brand:#8D96FF;--on:#0D0C27;--ok:#3DD9A0;--bad:#FF7AA8;--code:#0A091D}
+html{height:100%}*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:17px/1.6 "Bricolage Grotesque",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 50px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);border-bottom:1px solid var(--line);z-index:5}
+header .wrap{display:flex;align-items:center;gap:12px;height:56px;padding-bottom:0}
+.logo{font-weight:800;font-size:22px;margin-right:auto;border:0;background:none;color:var(--ink);padding:0}
+.logo b{color:var(--brand)}
+.chip{font:600 13px "JetBrains Mono",monospace;padding:5px 10px;border:1px solid var(--line);border-radius:99px;background:var(--surface)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--brand);color:var(--on);border:0;border-radius:10px;padding:12px 20px;font-weight:700;margin:4px 6px 4px 0}
+.btn.alt{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+button:focus-visible,textarea:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+h1{font-size:clamp(34px,7vw,56px);line-height:1.05;letter-spacing:-.03em;margin:36px 0 14px;font-weight:800}
+h2{font-size:28px;margin:30px 0 6px;letter-spacing:-.02em}h3{font-size:21px;margin:26px 0 6px}
+.hero p,.sub{color:var(--mute);font-size:19px;margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.card{text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-top:6px solid var(--c);border-radius:14px;padding:16px}
+.card strong{display:block;font-size:21px}.card span{display:block;color:var(--mute);font-size:15px}.card em{font-style:normal;color:var(--ok);font-weight:700;font-size:14px}
+.c0{--c:#2B5EE8}.c1{--c:#1E8E5A}.c2{--c:#D8481F}.c3{--c:#E8A400}.c4{--c:#5B6CFF}.c5{--c:#8A4FFF}.c6{--c:#E34F26}.c7{--c:#0E8FA8}.c8{--c:#D4A800}
+.list{display:grid;gap:10px}
+.item{text-align:left;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;font-weight:600}
+.item b{display:inline-block;min-width:28px;color:var(--brand)}
+pre{margin:0 0 14px;padding:14px;border-radius:12px;background:var(--code);color:var(--ci);font:15px/1.6 "JetBrains Mono",monospace;white-space:pre-wrap;overflow-x:auto}
+.outp{border-left:4px solid var(--ok)}
+textarea{width:100%;height:170px;margin-bottom:10px;background:var(--code);color:var(--ci);border:1.5px solid var(--line);border-radius:12px;padding:14px;font:15px/1.6 "JetBrains Mono",monospace}
+.steps{padding-left:22px}.steps li{margin:12px 0}.steps input{width:20px;height:20px;vertical-align:-4px;margin-right:8px}
+.ok{color:var(--ok);font-weight:800;font-size:20px;margin:14px 0 6px}.bad{color:var(--bad);font-weight:700;margin:14px 0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:10px}
+summary{font-weight:700;cursor:pointer}ul{margin:8px 0 0;padding-left:20px;color:var(--mute)}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
